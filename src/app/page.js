@@ -737,10 +737,21 @@ export default function LandingPage() {
                       `[data-faq-index="${idx}"]`
                     );
                     if (content) {
-                      const isVisible = content.style.maxHeight;
-                      content.style.maxHeight = isVisible ? '0' : '1000px';
-                      content.style.opacity = isVisible ? '0' : '1';
-                      content.style.paddingTop = isVisible ? '0' : '1rem';
+                      const currentMaxHeight = content.style.maxHeight;
+                      const isExpanded =
+                        currentMaxHeight && currentMaxHeight !== '0px';
+
+                      if (isExpanded) {
+                        // Collapse
+                        content.style.maxHeight = '0px';
+                        content.style.opacity = '0';
+                        content.style.paddingTop = '0';
+                      } else {
+                        // Expand
+                        content.style.maxHeight = '1000px';
+                        content.style.opacity = '1';
+                        content.style.paddingTop = '1rem';
+                      }
                     }
                   }}
                   whileHover={{ x: 4 }}
@@ -762,19 +773,12 @@ export default function LandingPage() {
                   className="text-gray-600 leading-relaxed overflow-hidden px-6 pb-6"
                   initial={{ maxHeight: 0, opacity: 0, paddingTop: 0 }}
                   animate={{
-                    maxHeight: '1000px',
-                    opacity: 1,
-                    paddingTop: '1rem',
+                    maxHeight: '0px',
+                    opacity: 0,
+                    paddingTop: 0,
                   }}
                   transition={{ duration: 0.3 }}
                   data-faq-index={idx}
-                  style={{
-                    maxHeight: '0',
-                    opacity: '0',
-                    paddingTop: '0',
-                    transition:
-                      'max-height 0.3s ease-out, opacity 0.3s ease-out, padding-top 0.3s ease-out',
-                  }}
                 >
                   {item.a}
                 </motion.div>
