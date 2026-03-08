@@ -77,8 +77,8 @@ export default function ContactPage() {
             Get in Touch
           </h1>
           <p className="text-lg text-gray-600 mb-8">
-            Have questions or feedback? We&apos;d love to hear from you. Reach
-            out and let&apos;s connect!
+            Have questions or feedback? We'd love to hear from you. Reach out
+            and let's connect!
           </p>
         </motion.div>
       </section>
@@ -302,7 +302,7 @@ export default function ContactPage() {
             },
             {
               q: 'How can I track my request?',
-              a: 'You&apos;ll receive a confirmation email with a ticket number.',
+              a: "You'll receive a confirmation email with a ticket number.",
             },
             {
               q: 'What payment methods do you accept?',
@@ -313,12 +313,33 @@ export default function ContactPage() {
               key={idx}
               {...fadeIn}
               transition={{ delay: idx * 0.1 }}
-              className="p-6 bg-white rounded-2xl border border-blue-100 shadow-lg hover:shadow-xl transition-all"
+              className="p-6 bg-white rounded-2xl border border-blue-100 shadow-lg hover:shadow-xl transition-all cursor-pointer group"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
-              <h3 className="font-bold text-lg text-gray-800 mb-3">
-                ❓ {faq.q}
-              </h3>
-              <p className="text-gray-600">{faq.a}</p>
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow">
+                  <span className="text-white text-xl font-bold">❓</span>
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-bold text-lg text-gray-800 mb-3 group-hover:text-blue-600 transition-colors">
+                    {faq.q}
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed">{faq.a}</p>
+                </div>
+              </div>
+              <div className="mt-4 flex items-center justify-between">
+                <span className="text-xs text-gray-400 uppercase tracking-wide font-semibold">
+                  Support
+                </span>
+                <motion.div
+                  className="w-8 h-8 bg-gradient-to-br from-green-400 to-blue-500 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-md"
+                  whileHover={{ rotate: 180 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  ✓
+                </motion.div>
+              </div>
             </motion.div>
           ))}
         </div>

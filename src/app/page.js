@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
+import { ChevronRight } from 'lucide-react';
 
 import Footer from '@/components/Footer/Footer';
 import Card from '@/components/Card';
@@ -674,82 +675,141 @@ export default function LandingPage() {
       </section>
 
       {/* 7. FAQ SECTION */}
-      <section className="relative py-24 bg-gray-50">
-        <div className="max-w-5xl mx-auto px-4 md:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4 text-gray-900">
+      <section className="py-24 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-4 md:px-8">
+          {/* Section Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
               Frequently Asked Questions
             </h2>
-            <p className="text-gray-600">
-              Find answers to common questions about our platform
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Find answers to common questions about our platform. Everything
+              you need to know in one place.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="grid gap-6">
+          {/* FAQ Accordion */}
+          <div className="space-y-4">
             {[
               {
-                q: 'How do I start?',
-                a: 'Sign up for an account, verify your email and begin adding products right away. Our onboarding process takes just 2 minutes to get you up and running.',
+                q: 'How do I start with your platform?',
+                a: 'Getting started is simple! Sign up for an account, verify your email, and begin adding products right away. Our intuitive onboarding process takes just 2 minutes to get you up and running. You will have access to all essential features immediately.',
               },
               {
-                q: 'Can I integrate with other tools?',
-                a: 'Yes, our open API allows you to connect with third-party services seamlessly. We support integrations with popular e-commerce platforms, payment gateways, and analytics tools.',
+                q: 'Can I integrate your platform with other tools?',
+                a: 'Absolutely! Our open API allows you to connect with third-party services seamlessly. We support integrations with popular e-commerce platforms, payment gateways, and analytics tools. Our API documentation provides comprehensive guides for developers.',
               },
               {
-                q: 'Is there a free trial?',
-                a: 'Absolutely! Get 14 days of full access with no credit card required. You can explore all features and upgrade anytime.',
+                q: 'Is there a free trial available?',
+                a: 'Yes! We offer 14 days of full access with no credit card required. During your trial, you can explore all features, add unlimited products, and experience the complete platform. Upgrade anytime during or after the trial period.',
               },
               {
                 q: 'What payment methods do you accept?',
-                a: 'We accept all major credit cards, PayPal, and bank transfers for enterprise customers. All transactions are secure and encrypted.',
+                a: 'We accept all major credit cards (Visa, MasterCard, American Express), PayPal, and bank transfers for enterprise customers. All transactions are secured with industry-standard encryption and comply with PCI DSS requirements.',
               },
               {
-                q: 'How is my data secured?',
-                a: 'We use industry-standard encryption (SSL/TLS), regular security audits, and comply with GDPR and other data protection regulations.',
+                q: 'How is my data secured and protected?',
+                a: 'We use industry-standard encryption (SSL/TLS), regular security audits, and comply with GDPR and other data protection regulations. Your data is stored in secure data centers with 99.9% uptime guarantee. We also provide two-factor authentication for added security.',
+              },
+              {
+                q: 'Do you offer customer support?',
+                a: 'Yes, we provide 24/7 customer support through multiple channels including live chat, email, and phone. Our dedicated support team is available to help you with any questions or issues. Enterprise customers receive priority support with dedicated account managers.',
               },
             ].map((item, idx) => (
               <motion.div
                 key={idx}
-                {...fadeIn}
-                className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden"
               >
-                <div className="flex items-start justify-between">
-                  <div className="flex-1">
-                    <h3 className="text-xl md:text-2xl font-semibold mb-3 text-gray-900">
-                      {item.q}
-                    </h3>
-                    <motion.p
-                      className="text-gray-600 leading-relaxed overflow-hidden"
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      {item.a}
-                    </motion.p>
-                  </div>
-                  <motion.button
-                    className="ml-4 p-2 rounded-full hover:bg-gray-100 transition-colors"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
+                <motion.button
+                  className="w-full text-left p-6 flex items-center justify-between group"
+                  onClick={() => {
+                    const content = document.querySelector(
+                      `[data-faq-index="${idx}"]`
+                    );
+                    if (content) {
+                      const isVisible = content.style.maxHeight;
+                      content.style.maxHeight = isVisible ? '0' : '1000px';
+                      content.style.opacity = isVisible ? '0' : '1';
+                      content.style.paddingTop = isVisible ? '0' : '1rem';
+                    }
+                  }}
+                  whileHover={{ x: 4 }}
+                  transition={{ type: 'spring', stiffness: 300 }}
+                >
+                  <h3 className="text-lg md:text-xl font-semibold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
+                    {item.q}
+                  </h3>
+                  <motion.div
+                    className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center group-hover:bg-blue-100 transition-colors duration-300"
+                    animate={{ rotate: 0 }}
+                    whileHover={{ rotate: 180 }}
+                    transition={{ duration: 0.3 }}
                   >
-                    <svg
-                      className="w-6 h-6 text-gray-600"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
-                  </motion.button>
-                </div>
+                    <ChevronRight className="w-5 h-5 text-gray-500 group-hover:text-blue-500 transition-colors duration-300" />
+                  </motion.div>
+                </motion.button>
+                <motion.div
+                  className="text-gray-600 leading-relaxed overflow-hidden px-6 pb-6"
+                  initial={{ maxHeight: 0, opacity: 0, paddingTop: 0 }}
+                  animate={{
+                    maxHeight: '1000px',
+                    opacity: 1,
+                    paddingTop: '1rem',
+                  }}
+                  transition={{ duration: 0.3 }}
+                  data-faq-index={idx}
+                  style={{
+                    maxHeight: '0',
+                    opacity: '0',
+                    paddingTop: '0',
+                    transition:
+                      'max-height 0.3s ease-out, opacity 0.3s ease-out, padding-top 0.3s ease-out',
+                  }}
+                >
+                  {item.a}
+                </motion.div>
               </motion.div>
             ))}
           </div>
+
+          {/* CTA Section */}
+          <motion.div
+            className="mt-16 text-center"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+          >
+            <div className="bg-white rounded-lg p-8 shadow-md border border-gray-200">
+              <h3 className="text-xl font-bold text-gray-900 mb-4">
+                Still have questions?
+              </h3>
+              <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+                Our team is here to help. Contact us and we'll get back to you
+                within 24 hours.
+              </p>
+              <motion.button
+                whileHover={{
+                  scale: 1.05,
+                  boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
+                }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 text-base"
+              >
+                Contact Support
+              </motion.button>
+            </div>
+          </motion.div>
         </div>
       </section>
 
