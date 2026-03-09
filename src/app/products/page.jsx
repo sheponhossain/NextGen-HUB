@@ -244,7 +244,7 @@ export default function ProductsPage() {
                       </button>
 
                       {/* Dropdown Menu */}
-                      <div className="absolute left-0 top-full mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform group-hover:translate-y-0 -translate-y-2 z-50">
+                      <div className="absolute left-0 top-full mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform group-hover:translate-y-0 -translate-y-2 z-[100]">
                         <div className="p-2">
                           {categories.map((cat) => (
                             <button
