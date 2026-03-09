@@ -43,7 +43,6 @@ export default function ProductsPage() {
         alert('Failed to delete product');
       }
     } catch (error) {
-      console.error('Error deleting product:', error);
       alert('Error deleting product');
     } finally {
       setShowDeleteConfirm(false);
@@ -89,7 +88,6 @@ export default function ProductsPage() {
           setProducts([]);
         }
       } catch (err) {
-        console.error('Error fetching products:', err);
         setError('Failed to load products. Please try again later.');
       } finally {
         setLoading(false);

@@ -54,12 +54,10 @@ export async function POST(request) {
       filename: filename,
     });
   } catch (error) {
-    console.error('Upload error:', error);
     return NextResponse.json(
       {
         success: false,
         error: 'Failed to upload file',
-        details: error.message,
       },
       { status: 500 }
     );

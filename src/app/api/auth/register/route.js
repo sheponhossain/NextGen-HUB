@@ -50,7 +50,6 @@ export async function POST(req) {
     try {
       await connectDB();
     } catch (dbError) {
-      console.error('Database connection failed during registration:', dbError);
       return new Response(
         JSON.stringify({
           message: 'Database connection failed. Please try again later.',
@@ -96,43 +95,9 @@ export async function POST(req) {
       }
     );
   } catch (error) {
-    console.error('Registration error:', error);
-
-    // Handle specific error types
-    if (error.name === 'ValidationError') {
-      return new Response(
-        JSON.stringify({
-          message: 'Invalid data provided',
-          details: error.message,
-        }),
-        {
-          status: 400,
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-    }
-
-    if (error.code === 11000) {
-      return new Response(
-        JSON.stringify({
-          message: 'User with that email already exists',
-        }),
-        {
-          status: 409,
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-    }
-
     return new Response(
       JSON.stringify({
         message: 'Server error. Please try again later.',
-        error:
-          process.env.NODE_ENV === 'development' ? error.message : undefined,
       }),
       {
         status: 500,

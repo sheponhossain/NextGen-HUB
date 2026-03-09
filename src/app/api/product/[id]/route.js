@@ -42,7 +42,6 @@ export async function DELETE(req, { params }) {
       message: 'Product deleted successfully',
     });
   } catch (error) {
-    console.error('Error deleting product:', error);
     return NextResponse.json(
       { success: false, error: error.message },
       { status: 400 }
@@ -147,7 +146,6 @@ export async function PUT(req, { params }) {
       { status: 200 }
     );
   } catch (error) {
-    console.error('Error updating product:', error);
     return NextResponse.json(
       { success: false, error: error.message },
       { status: 400 }

@@ -45,7 +45,6 @@ export default function ManageProducts() {
         alert('Failed to update product');
       }
     } catch (error) {
-      console.error('Error updating product:', error);
       alert('Error updating product');
     }
   };
@@ -175,7 +174,6 @@ export default function ManageProducts() {
         confirmButtonColor: '#22c55e',
       });
     } catch (error) {
-      console.error('Export failed:', error);
       Swal.fire({
         title: 'Export Failed',
         text: `Failed to export data: ${error.message}`,
@@ -395,7 +393,6 @@ export default function ManageProducts() {
         });
       }
     } catch (error) {
-      console.error('Bulk import failed:', error);
       Swal.fire({
         title: 'Import Failed',
         text: `Failed to import products: ${error.message}`,

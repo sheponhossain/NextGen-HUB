@@ -1,7 +1,5 @@
 import mongoose from 'mongoose';
 
-console.log('Loading Product model...');
-
 const productSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -89,8 +87,5 @@ const productSchema = new mongoose.Schema({
 
 const Product =
   mongoose.models.Product || mongoose.model('Product', productSchema);
-
-console.log('Product model loaded:', typeof Product);
-console.log('Product.create method:', typeof Product.create);
 
 export default Product;

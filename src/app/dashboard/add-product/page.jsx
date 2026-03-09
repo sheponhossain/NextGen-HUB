@@ -16,35 +16,15 @@ export default function AddProduct() {
 
   const fetchProductForEdit = async (id) => {
     try {
-      console.log('Fetching product for edit with ID:', id);
       const res = await fetch(`/api/product/${id}`);
-      console.log('Fetch response status:', res.status);
 
       if (res.ok) {
         const data = await res.json();
-        console.log('Product data received:', data);
         setEditingProduct(data.data);
       } else {
-        const errorText = await res.text();
-        console.error('Failed to fetch product:', errorText);
-        Swal.fire({
-          title: 'Load Error',
-          text: `Failed to load product for editing. Status: ${res.status}`,
-          icon: 'error',
-          confirmButtonText: 'OK',
-          confirmButtonColor: '#ef4444',
-        });
         router.push('/dashboard/manage');
       }
     } catch (error) {
-      console.error('Error fetching product:', error);
-      Swal.fire({
-        title: 'Load Error',
-        text: 'Failed to load product for editing',
-        icon: 'error',
-        confirmButtonText: 'OK',
-        confirmButtonColor: '#ef4444',
-      });
       router.push('/dashboard/manage');
     }
   };
@@ -295,7 +275,13 @@ export default function AddProduct() {
           const uploadError = await uploadRes.json();
           errorMessage = uploadError.error || errorMessage;
         } catch (parseError) {
-          console.error('Failed to parse upload error:', parseError);
+          // If we can't parse the JSON, try to get the text response
+          try {
+            const errorText = await uploadRes.text();
+            errorMessage = errorText || 'Server returned an invalid response';
+          } catch (textError) {
+            errorMessage = 'Server returned an invalid response';
+          }
         }
         Swal.fire({
           title: 'Upload Error',
@@ -336,7 +322,6 @@ export default function AddProduct() {
 
     if (res.ok) {
       const result = await res.json();
-      console.log('Product saved successfully:', result.data);
       Swal.fire({
         title: editingProduct ? 'Product Updated!' : 'Product Added!',
         text: editingProduct
@@ -351,7 +336,6 @@ export default function AddProduct() {
       let errorMessage = 'Unknown error occurred';
       try {
         const error = await res.json();
-        console.error('Failed to save product:', error);
 
         // Handle different error formats
         if (error && error.error) {
@@ -364,14 +348,12 @@ export default function AddProduct() {
           errorMessage = JSON.stringify(error);
         }
       } catch (parseError) {
-        console.error('Failed to parse error response:', parseError);
         // If we can't parse the JSON, try to get the text response
         try {
           const errorText = await res.text();
-          console.error('Raw error response:', errorText);
           errorMessage = errorText || 'Server returned an invalid response';
         } catch (textError) {
-          console.error('Failed to get error text:', textError);
+          errorMessage = 'Server returned an invalid response';
         }
       }
 

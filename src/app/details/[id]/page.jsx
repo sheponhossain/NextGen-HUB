@@ -89,9 +89,7 @@ export default function ProductDetails() {
               }
             }
           }
-        } catch (fallbackError) {
-          console.error('Fallback API also failed:', fallbackError);
-        }
+        } catch (fallbackError) {}
 
         // If all API attempts fail, use sample data
         const sampleProducts = [

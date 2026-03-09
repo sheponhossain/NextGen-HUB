@@ -29,7 +29,6 @@ export default function LoginPage() {
         setLoading(false);
       }
     } catch (error) {
-      console.error('Login error:', error);
       alert('An error occurred during login. Please try again.');
       setLoading(false);
     }
@@ -43,13 +42,11 @@ export default function LoginPage() {
       });
 
       if (result?.error) {
-        console.error('Google login error:', result.error);
         alert(
           'Google login failed. Please check your credentials and try again.'
         );
       }
     } catch (error) {
-      console.error('Google login error:', error);
       alert(
         'Google login failed. Please check your internet connection and try again.'
       );

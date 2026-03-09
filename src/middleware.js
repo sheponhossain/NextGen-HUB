@@ -4,17 +4,10 @@ export default withAuth(
   // `withAuth` augments your `Request` with the user's token.
   function middleware(req) {
     // The middleware function is called for all routes except those excluded
-    console.log('Middleware executed for:', req.nextUrl.pathname);
   },
   {
     callbacks: {
       authorized: ({ token, req: authReq }) => {
-        console.log(
-          'Authorization check for:',
-          authReq?.nextUrl?.pathname,
-          'Token:',
-          !!token
-        );
         return !!token;
       },
     },

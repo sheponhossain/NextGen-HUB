@@ -23,13 +23,11 @@ async function seedDatabase() {
     };
 
     await mongoose.connect(mongoURI, options);
-    console.log('Connected to MongoDB');
 
     // Check if demo user already exists
     const existingUser = await User.findOne({ email: 'demo@example.com' });
 
     if (existingUser) {
-      console.log('Demo user already exists:', existingUser.email);
       return;
     }
 
@@ -41,17 +39,9 @@ async function seedDatabase() {
       password: hashedPassword,
     });
 
-    console.log('Demo user created successfully:');
-    console.log('Email: demo@example.com');
-    console.log('Password: demopassword123');
-    console.log('User ID:', demoUser._id);
-
     // Close connection
     await mongoose.connection.close();
-    console.log('Database connection closed');
-  } catch (error) {
-    console.error('Error seeding database:', error);
-  }
+  } catch (error) {}
 }
 
 // Run the seed function

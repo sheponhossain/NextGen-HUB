@@ -7,14 +7,6 @@ export async function POST(req) {
     await connectDB();
     const body = await req.json();
 
-    // Debug: Log the incoming data
-    console.log('Incoming product data:', body);
-    console.log('Price value:', body.price, typeof body.price);
-
-    // Debug: Check if Product model is properly loaded
-    console.log('Product model:', typeof Product);
-    console.log('Product.create:', typeof Product.create);
-
     // Validate required fields with more descriptive error messages
     const errors = [];
 
@@ -97,28 +89,7 @@ export async function POST(req) {
       updatedAt: now,
     };
 
-    console.log('Creating product with data:', productData);
-
-    // Debug: Check if Product.create is a function
-    if (typeof Product.create !== 'function') {
-      throw new Error(
-        'Product.create is not a function. Model may not be properly loaded.'
-      );
-    }
-
-    console.log('Attempting to save product to MongoDB...');
     const newProduct = await Product.create(productData);
-    console.log('Product successfully saved to MongoDB:', {
-      id: newProduct._id,
-      title: newProduct.title,
-      price: newProduct.price,
-      category: newProduct.category,
-      sku: newProduct.sku,
-      imageUrl: newProduct.imageUrl,
-      imageSavedTo: newProduct.imageUrl
-        ? `http://localhost:3000${newProduct.imageUrl}`
-        : 'No image',
-    });
 
     return NextResponse.json(
       {
@@ -129,32 +100,10 @@ export async function POST(req) {
       { status: 201 }
     );
   } catch (error) {
-    console.error('Error creating product:', error);
-    console.error('Error details:', {
-      name: error.name,
-      message: error.message,
-      stack: error.stack,
-    });
-
-    // Provide more specific error messages based on error type
-    let errorMessage = 'Failed to create product';
-
-    if (error.name === 'ValidationError') {
-      const validationErrors = Object.values(error.errors).map(
-        (err) => err.message
-      );
-      errorMessage = `Validation error: ${validationErrors.join('. ')}`;
-    } else if (error.name === 'MongoServerError' && error.code === 11000) {
-      errorMessage = 'A product with this SKU already exists';
-    } else if (error.message) {
-      errorMessage = error.message;
-    }
-
     return NextResponse.json(
       {
         success: false,
-        error: errorMessage,
-        details: error.name === 'ValidationError' ? error.errors : null,
+        error: 'Failed to create product',
       },
       { status: 400 }
     );
@@ -189,7 +138,6 @@ export async function DELETE(req, { params }) {
       message: 'Product deleted successfully',
     });
   } catch (error) {
-    console.error('Error deleting product:', error);
     return NextResponse.json(
       { success: false, error: error.message },
       { status: 400 }
