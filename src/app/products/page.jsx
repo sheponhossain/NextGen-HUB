@@ -194,40 +194,6 @@ export default function ProductsPage() {
           </motion.div>
         </section>
 
-        {/* Category Filter Section */}
-        <section className="container mx-auto px-4 mb-8">
-          <div className="flex justify-center">
-            <div className="flex flex-wrap gap-3">
-              {categories.map((cat) => (
-                <motion.button
-                  key={cat.id}
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => setFilter(cat.id)}
-                  className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 flex items-center gap-3 ${
-                    filter === cat.id
-                      ? 'bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white shadow-2xl shadow-blue-500/25 transform hover:scale-105'
-                      : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-200/50 hover:-translate-y-1'
-                  }`}
-                >
-                  <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center text-lg transition-all duration-300 ${
-                      filter === cat.id
-                        ? 'bg-white/20 backdrop-blur-sm'
-                        : 'bg-gray-100'
-                    }`}
-                  >
-                    {cat.icon}
-                  </div>
-                  <span className="text-sm font-medium tracking-wide">
-                    {cat.label}
-                  </span>
-                </motion.button>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Search Section */}
         <section className="container mx-auto px-4 mb-12">
           <div className="flex justify-center">
