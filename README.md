@@ -49,36 +49,15 @@ cd NextGen-HUB
 npm install
 ```
 
-### 3. Environment Setup
 
-Create a `.env` file in the root directory and add the following variables:
 
-```env
-# Database
-MONGODB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/nextgen-hub?retryWrites=true&w=majority
-
-# Authentication
-GOOGLE_CLIENT_ID=your_google_client_id
-GOOGLE_CLIENT_SECRET=your_google_client_secret
-NEXTAUTH_URL=http://localhost:3000
-NEXTAUTH_SECRET=your_nextauth_secret
-
-# File Upload
-CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
-CLOUDINARY_API_KEY=your_cloudinary_api_key
-CLOUDINARY_API_SECRET=your_cloudinary_api_secret
-
-# Session Secret
-SESSION_SECRET=your_session_secret
-```
-
-### 4. Run the development server
+### 3 . Run the development server
 
 ```bash
 npm run dev
 ```
 
-Visit [http://localhost:3000](http://localhost:3000) to see the application.
+Visit [https://next-gen-hub-gules.vercel.app] to see the application.
 
 ## 🗂️ Project Structure
 
@@ -180,8 +159,7 @@ nextgen-hub/
 
 ### Cloudinary Setup
 1. Sign up at [Cloudinary](https://cloudinary.com/)
-2. Get your cloud name, API key, and API secret
-3. Add to `.env` file
+2. Add to `.env` file
 
 ## 🚀 Deployment
 
@@ -205,17 +183,6 @@ docker run -p 3000:3000 nextgen-hub
 4. Test thoroughly
 5. Submit a pull request
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 📞 Support
-
-For support and questions:
-- Visit our [Help Center](/help)
-- Check [System Status](/status)
-- Join our [Community](/community)
-- Contact us through the [Contact Page](/contact)
 
 ## 🙏 Acknowledgments
 
