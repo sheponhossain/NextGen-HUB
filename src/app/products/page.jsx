@@ -13,6 +13,7 @@ const fadeIn = {
 
 export default function ProductsPage() {
   const [filter, setFilter] = useState('all');
+  const [searchTerm, setSearchTerm] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [products, setProducts] = useState([]);
@@ -107,8 +108,19 @@ export default function ProductsPage() {
     { id: '🤖 AI Tools', label: 'AI Tools', icon: '🤖' },
   ];
 
-  const filteredProducts =
-    filter === 'all' ? products : products.filter((p) => p.category === filter);
+  const filteredProducts = products.filter((product) => {
+    // Filter by category
+    const categoryMatch = filter === 'all' || product.category === filter;
+
+    // Filter by search term (case insensitive)
+    const searchMatch =
+      searchTerm === '' ||
+      product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.category.toLowerCase().includes(searchTerm.toLowerCase());
+
+    return categoryMatch && searchMatch;
+  });
 
   return (
     <>
@@ -182,25 +194,52 @@ export default function ProductsPage() {
           </motion.div>
         </section>
 
-        {/* Filter Section */}
+        {/* Search and Filter Section */}
         <section className="container mx-auto px-4 mb-12">
-          <div className="flex flex-wrap gap-3 justify-center">
-            {categories.map((cat) => (
-              <motion.button
-                key={cat.id}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setFilter(cat.id)}
-                className={`px-6 py-3 rounded-full font-semibold transition-all duration-200 flex items-center gap-2 ${
-                  filter === cat.id
-                    ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg'
-                    : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-blue-600'
-                }`}
+          <div className="flex flex-col lg:flex-row gap-6 items-center justify-center">
+            {/* Search Bar */}
+            <div className="relative w-full max-w-md">
+              <input
+                type="text"
+                placeholder="Search products..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full px-6 py-4 pl-12 bg-white border-2 border-gray-200 rounded-full focus:border-blue-600 focus:outline-none text-lg font-medium transition-all duration-200 shadow-lg"
+              />
+              <svg
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 w-6 h-6 text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
               >
-                <span className="text-lg">{cat.icon}</span>
-                {cat.label}
-              </motion.button>
-            ))}
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+            </div>
+
+            {/* Category Filter */}
+            <div className="flex flex-wrap gap-3">
+              {categories.map((cat) => (
+                <motion.button
+                  key={cat.id}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setFilter(cat.id)}
+                  className={`px-6 py-3 rounded-full font-semibold transition-all duration-200 flex items-center gap-2 ${
+                    filter === cat.id
+                      ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg'
+                      : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-blue-600'
+                  }`}
+                >
+                  <span className="text-lg">{cat.icon}</span>
+                  {cat.label}
+                </motion.button>
+              ))}
+            </div>
           </div>
         </section>
 
