@@ -63,15 +63,34 @@ export default function Footer() {
             className="lg:col-span-2"
           >
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center shadow-lg">
-                <span className="text-white font-bold text-lg">N</span>
+              <div className="flex items-center font-sans">
+                <div className="relative flex flex-col items-start">
+                  {/* Main Text Container */}
+                  <div className="flex items-baseline leading-none">
+                    {/* NextGen Part */}
+                    <h1
+                      className="text-xl md:text-2xl font-bold tracking-tight bg-gradient-to-b from-blue-400 via-blue-600 to-blue-800 bg-clip-text text-transparent drop-shadow-lg"
+                      style={{
+                        filter: 'drop-shadow(0px 2px 2px rgba(0,0,0,0.5))',
+                      }}
+                    >
+                      NextGen
+                    </h1>
+
+                    {/* Vertical Separator */}
+                    <div className="mx-1 w-[3px] h-[20px] md:h-[24px] bg-gradient-to-b from-green-400 to-blue-500 rounded-full shadow-inner"></div>
+
+                    {/* HUB Part */}
+                    <h1 className="text-xl md:text-2xl font-black tracking-tighter bg-gradient-to-b from-sky-300 to-sky-600 bg-clip-text text-transparent drop-shadow-md">
+                      HUB
+                    </h1>
+                  </div>
+
+                  {/* Bottom Decorative Line */}
+                  <div className="w-[60%] h-[3px] mt-0.5 bg-gradient-to-r from-blue-500 via-green-400 to-green-500 rounded-sm shadow-lg"></div>
+                </div>
               </div>
-              <div>
-                <h3 className="text-2xl font-bold text-white">NextGen Hub</h3>
-                <p className="text-blue-400 text-sm font-medium">
-                  Innovation Platform
-                </p>
-              </div>
+              <span className="sr-only">NextGen Hub</span>
             </div>
 
             <p className="text-sm leading-relaxed text-gray-400 mb-6">
