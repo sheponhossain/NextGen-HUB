@@ -47,9 +47,9 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-black text-gray-300">
+    <footer className="relative bg-gray-900 text-gray-300">
       {/* Decorative Background */}
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10"></div>
+      <div className="absolute inset-0 bg-gray-800"></div>
 
       <div className="relative container mx-auto px-4 py-16">
         {/* Main Footer Content */}
