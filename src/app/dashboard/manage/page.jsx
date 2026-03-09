@@ -86,22 +86,33 @@ export default function ManageProducts() {
       return;
     }
 
-    const res = await fetch(`/api/products/${id}`, { method: 'DELETE' });
-    if (res.ok) {
-      setProducts(products.filter((p) => p._id !== id));
-      setIsModalOpen(false); // Close modal after successful deletion
-      Swal.fire({
-        title: 'Deleted!',
-        text: 'Your product has been deleted.',
-        icon: 'success',
-        confirmButtonText: 'OK',
-        confirmButtonColor: '#22c55e',
-      });
-    } else {
-      const errorData = await res.json();
+    try {
+      const res = await fetch(`/api/products/${id}`, { method: 'DELETE' });
+
+      if (res.ok) {
+        setProducts(products.filter((p) => p._id !== id));
+        setIsModalOpen(false); // Close modal after successful deletion
+        Swal.fire({
+          title: 'Deleted!',
+          text: 'Your product has been deleted.',
+          icon: 'success',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#22c55e',
+        });
+      } else {
+        const errorData = await res.json();
+        Swal.fire({
+          title: 'Delete Failed',
+          text: `Failed to delete product: ${errorData.error || 'Unknown error'}`,
+          icon: 'error',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#ef4444',
+        });
+      }
+    } catch (error) {
       Swal.fire({
         title: 'Delete Failed',
-        text: `Failed to delete product: ${errorData.error || 'Unknown error'}`,
+        text: `Network error: ${error.message}`,
         icon: 'error',
         confirmButtonText: 'OK',
         confirmButtonColor: '#ef4444',
