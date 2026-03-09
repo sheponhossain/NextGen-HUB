@@ -17,7 +17,7 @@ export default function AddProduct() {
 
   const fetchProductForEdit = async (id) => {
     try {
-      const res = await fetch(`/api/product/${id}`);
+      const res = await fetch(`/api/products/${id}`);
 
       if (res.ok) {
         const data = await res.json();
