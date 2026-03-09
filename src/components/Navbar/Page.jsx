@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { signOut, useSession } from 'next-auth/react';
+import Swal from 'sweetalert2';
 
 function UserDropdown() {
   const { data: session, status } = useSession();
@@ -153,10 +154,20 @@ function UserDropdown() {
               className="px-4 py-2 text-sm text-red-600 hover:text-red-700 cursor-pointer flex items-center gap-3"
               onClick={async () => {
                 setDropdownOpen(false);
-                await signOut({
-                  callbackUrl: '/',
-                  redirect: true,
-                });
+                try {
+                  await signOut({
+                    callbackUrl: '/',
+                    redirect: true,
+                  });
+                } catch (error) {
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'Logout Error',
+                    text: 'There was an issue logging you out. Please try again.',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#3085d6',
+                  });
+                }
               }}
             >
               <span className="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center">

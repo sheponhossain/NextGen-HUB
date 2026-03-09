@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
+import Swal from 'sweetalert2';
 
 export default function LoginPage() {
   const [loading, setLoading] = useState(false);
@@ -22,13 +23,26 @@ export default function LoginPage() {
       });
 
       if (res.ok) {
-        router.push('/');
+        window.location.href = '/';
         router.refresh();
       } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Invalid Credentials',
+          text: 'Try demo@example.com / demopassword123',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#3085d6',
+        });
         setLoading(false);
       }
     } catch (error) {
-      alert('An error occurred during login. Please try again.');
+      Swal.fire({
+        icon: 'error',
+        title: 'Login Error',
+        text: 'An error occurred during login. Please try again.',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#3085d6',
+      });
       setLoading(false);
     }
   };
@@ -39,9 +53,13 @@ export default function LoginPage() {
         callbackUrl: '/',
       });
     } catch (error) {
-      alert(
-        'Google login failed. Please check your internet connection and try again.'
-      );
+      Swal.fire({
+        icon: 'error',
+        title: 'Google Login Failed',
+        text: 'Please check your internet connection and try again.',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#3085d6',
+      });
     }
   };
 
