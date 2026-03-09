@@ -272,15 +272,30 @@ export default function Footer() {
           <AnimatePresence>
             {showMessage && (
               <motion.div
-                initial={{ opacity: 0, x: 20, scale: 0.8 }}
-                animate={{ opacity: 1, x: 0, scale: 1 }}
-                exit={{ opacity: 0, x: 20, scale: 0.8 }}
-                transition={{ delay: 0.5, duration: 0.5 }}
-                className="absolute -top-16 -right-2 bg-white text-gray-800 px-4 py-2 rounded-lg shadow-lg text-sm font-medium border border-gray-200"
+                initial={{ opacity: 0, y: 10, scale: 0.8 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 10, scale: 0.8 }}
+                transition={{
+                  delay: 0.5,
+                  duration: 0.5,
+                  type: 'spring',
+                  stiffness: 260,
+                  damping: 20,
+                }}
+                className="absolute -top-20 -left-24 bg-white text-gray-800 px-4 py-3 rounded-xl shadow-lg text-sm font-medium border border-gray-200 min-w-[160px]"
               >
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                  <span>Need help? Chat with us!</span>
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 bg-gradient-to-br from-pink-400 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-md flex-shrink-0">
+                    S
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-xs text-gray-500 mb-1">
+                      Support Team
+                    </div>
+                    <div className="text-gray-700 leading-relaxed">
+                      Need help? Chat with us!
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             )}
