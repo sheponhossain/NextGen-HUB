@@ -204,17 +204,93 @@ export default function ProductsPage() {
 
               {/* Main Container */}
               <div className="relative bg-white/60 backdrop-blur-xl border border-white/20 rounded-2xl p-6 shadow-2xl shadow-blue-500/10">
-                {/* Search Bar */}
+                {/* Search Bar with Dropdown */}
                 <div className="relative mb-4">
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-indigo-500/10 rounded-full blur-xl"></div>
+
+                  {/* Category Dropdown */}
+                  <div className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10">
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      className="relative group"
+                    >
+                      <button
+                        className={`px-4 py-2 rounded-full font-semibold transition-all duration-300 flex items-center gap-2 ${
+                          filter === 'all'
+                            ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg'
+                            : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-blue-400'
+                        }`}
+                      >
+                        <span className="text-lg">
+                          {categories.find((c) => c.id === filter)?.icon ||
+                            '📦'}
+                        </span>
+                        <span className="text-sm">
+                          {categories.find((c) => c.id === filter)?.label ||
+                            'All Products'}
+                        </span>
+                        <svg
+                          className="w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M19 9l-7 7-7-7"
+                          />
+                        </svg>
+                      </button>
+
+                      {/* Dropdown Menu */}
+                      <div className="absolute left-0 top-full mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform group-hover:translate-y-0 -translate-y-2 z-50">
+                        <div className="p-2">
+                          {categories.map((cat) => (
+                            <button
+                              key={cat.id}
+                              onClick={() => setFilter(cat.id)}
+                              className={`w-full px-4 py-3 text-left rounded-lg font-medium transition-all duration-200 flex items-center gap-3 ${
+                                filter === cat.id
+                                  ? 'bg-blue-50 text-blue-700 border-l-4 border-blue-500'
+                                  : 'text-gray-700 hover:bg-gray-50'
+                              }`}
+                            >
+                              <span className="text-lg">{cat.icon}</span>
+                              <span>{cat.label}</span>
+                              {filter === cat.id && (
+                                <svg
+                                  className="w-4 h-4 ml-auto text-blue-500"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M5 13l4 4L19 7"
+                                  />
+                                </svg>
+                              )}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    </motion.div>
+                  </div>
+
+                  {/* Search Input */}
                   <input
                     type="text"
                     placeholder="Search products, features, or categories..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full px-8 py-4 pl-14 bg-white/80 backdrop-blur-sm border-2 border-gray-200 rounded-full focus:border-blue-500 focus:ring-4 focus:ring-blue-200 focus:outline-none text-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl hover:border-blue-300"
+                    className="w-full px-24 py-4 pl-28 bg-white/80 backdrop-blur-sm border-2 border-gray-200 rounded-full focus:border-blue-500 focus:ring-4 focus:ring-blue-200 focus:outline-none text-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl hover:border-blue-300"
                   />
-                  <div className="absolute left-5 top-1/2 transform -translate-y-1/2 w-6 h-6 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full flex items-center justify-center">
+
+                  <div className="absolute left-20 top-1/2 transform -translate-y-1/2 w-6 h-6 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full flex items-center justify-center">
                     <svg
                       className="w-4 h-4 text-white"
                       fill="none"
@@ -229,6 +305,7 @@ export default function ProductsPage() {
                       />
                     </svg>
                   </div>
+
                   {searchTerm && (
                     <button
                       onClick={() => setSearchTerm('')}
