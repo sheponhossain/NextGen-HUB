@@ -17,7 +17,7 @@ export async function GET(req, { params }) {
       );
     }
 
-    const { id } = params;
+    const { id } = await params;
     const product = await Product.findById(id);
 
     if (!product) {
@@ -60,7 +60,7 @@ export async function DELETE(req, { params }) {
       );
     }
 
-    const { id } = params;
+    const { id } = await params;
     const product = await Product.findById(id);
 
     if (!product) {
@@ -108,7 +108,7 @@ export async function PUT(req, { params }) {
       );
     }
 
-    const { id } = params;
+    const { id } = await params;
     const body = await req.json();
 
     // Validate required fields
