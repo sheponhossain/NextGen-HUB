@@ -136,8 +136,10 @@ export async function GET() {
       );
     }
 
-    // Show all products from all users (no filtering by createdBy)
-    const products = await Product.find().sort({ createdAt: -1 });
+    // Filter products to show only those created by the current user's email
+    const products = await Product.find({
+      createdBy: session.user.email,
+    }).sort({ createdAt: -1 });
     return NextResponse.json({ success: true, data: products });
   } catch (error) {
     return NextResponse.json({ success: false }, { status: 400 });
