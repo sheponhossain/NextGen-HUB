@@ -332,8 +332,9 @@ export default function AddProduct() {
         icon: 'success',
         confirmButtonText: 'OK',
         confirmButtonColor: '#22c55e',
+      }).then(() => {
+        router.push('/dashboard/manage');
       });
-      router.push('/dashboard/manage');
     } else {
       let errorMessage = 'Unknown error occurred';
       try {
