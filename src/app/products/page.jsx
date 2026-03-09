@@ -208,7 +208,7 @@ export default function ProductsPage() {
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-indigo-500/10 rounded-full blur-xl"></div>
 
                   {/* Category Dropdown */}
-                  <div className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10">
+                  <div className="absolute left-4 top-1/2 transform -translate-y-1/2 z-50">
                     <motion.div
                       whileHover={{ scale: 1.05 }}
                       className="relative group"
