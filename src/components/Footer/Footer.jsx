@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect } from 'react';
 import {
   Mail,
   Phone,
@@ -47,6 +48,17 @@ export default function Footer() {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  // Customer support state
+  const [showMessage, setShowMessage] = useState(true);
+
+  // Auto-hide message after 4 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowMessage(false);
+    }, 4000);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <footer className="relative bg-gray-900 text-gray-300">
@@ -257,17 +269,22 @@ export default function Footer() {
         {/* Floating Chat Widget */}
         <div className="relative">
           {/* Chat Bubble */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.5, duration: 0.5 }}
-            className="absolute -top-16 -right-2 bg-white text-gray-800 px-4 py-2 rounded-lg shadow-lg text-sm font-medium border border-gray-200"
-          >
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-              <span>Need help? Chat with us!</span>
-            </div>
-          </motion.div>
+          <AnimatePresence>
+            {showMessage && (
+              <motion.div
+                initial={{ opacity: 0, x: 20, scale: 0.8 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                exit={{ opacity: 0, x: 20, scale: 0.8 }}
+                transition={{ delay: 0.5, duration: 0.5 }}
+                className="absolute -top-16 -right-2 bg-white text-gray-800 px-4 py-2 rounded-lg shadow-lg text-sm font-medium border border-gray-200"
+              >
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                  <span>Need help? Chat with us!</span>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Customer Support Button */}
           <button
