@@ -24,3 +24,601 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Enhanced responsive design utilities */
+@layer utilities {
+  /* Container variants for different screen sizes */
+  .container-sm {
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .container-md {
+    max-width: 768px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .container-lg {
+    max-width: 1024px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .container-xl {
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+
+  /* Responsive text sizing */
+  .text-responsive-sm {
+    font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+  }
+
+  .text-responsive-base {
+    font-size: clamp(0.875rem, 2vw, 1rem);
+  }
+
+  .text-responsive-lg {
+    font-size: clamp(1rem, 2.5vw, 1.125rem);
+  }
+
+  .text-responsive-xl {
+    font-size: clamp(1.125rem, 3vw, 1.25rem);
+  }
+
+  .text-responsive-2xl {
+    font-size: clamp(1.25rem, 4vw, 1.5rem);
+  }
+
+  .text-responsive-3xl {
+    font-size: clamp(1.5rem, 5vw, 1.875rem);
+  }
+
+  .text-responsive-4xl {
+    font-size: clamp(1.875rem, 6vw, 2.25rem);
+  }
+
+  .text-responsive-5xl {
+    font-size: clamp(2.25rem, 8vw, 3rem);
+  }
+
+  .text-responsive-6xl {
+    font-size: clamp(3rem, 10vw, 3.75rem);
+  }
+
+  /* Responsive spacing */
+  .space-y-responsive > * + * {
+    margin-top: clamp(0.5rem, 2vw, 1rem);
+  }
+
+  .space-x-responsive > * + * {
+    margin-left: clamp(0.5rem, 2vw, 1rem);
+  }
+
+  /* Responsive padding variants */
+  .p-responsive {
+    padding: clamp(1rem, 4vw, 2rem);
+  }
+
+  .px-responsive {
+    padding-left: clamp(1rem, 4vw, 2rem);
+    padding-right: clamp(1rem, 4vw, 2rem);
+  }
+
+  .py-responsive {
+    padding-top: clamp(1rem, 4vw, 2rem);
+    padding-bottom: clamp(1rem, 4vw, 2rem);
+  }
+
+  /* Responsive margin variants */
+  .m-responsive {
+    margin: clamp(0.5rem, 2vw, 1rem);
+  }
+
+  .mx-responsive {
+    margin-left: clamp(0.5rem, 2vw, 1rem);
+    margin-right: clamp(0.5rem, 2vw, 1rem);
+  }
+
+  .my-responsive {
+    margin-top: clamp(0.5rem, 2vw, 1rem);
+    margin-bottom: clamp(0.5rem, 2vw, 1rem);
+  }
+
+  /* Responsive border radius */
+  .rounded-responsive {
+    border-radius: clamp(0.5rem, 2vw, 1rem);
+  }
+
+  /* Responsive shadow */
+  .shadow-responsive {
+    box-shadow:
+      0 10px 25px -3px rgba(0, 0, 0, 0.1),
+      0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Responsive height */
+  .h-responsive {
+    height: clamp(200px, 40vw, 400px);
+  }
+
+  /* Responsive width */
+  .w-responsive {
+    width: clamp(200px, 40vw, 400px);
+  }
+
+  /* Responsive grid columns */
+  .grid-cols-auto-fit {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+
+  .grid-cols-auto-fill {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+
+  /* Responsive aspect ratios */
+  .aspect-auto {
+    aspect-ratio: auto;
+  }
+
+  .aspect-square {
+    aspect-ratio: 1 / 1;
+  }
+
+  .aspect-video {
+    aspect-ratio: 16 / 9;
+  }
+
+  .aspect-responsive {
+    aspect-ratio: clamp(1 / 1, 2vw, 16 / 9);
+  }
+
+  /* Responsive transform */
+  .scale-responsive {
+    transform: scale(clamp(0.9, 0.1vw, 1));
+  }
+
+  /* Responsive opacity */
+  .opacity-responsive {
+    opacity: clamp(0.8, 0.1vw, 1);
+  }
+
+  /* Responsive blur */
+  .blur-responsive {
+    filter: blur(clamp(0px, 0.5vw, 4px));
+  }
+
+  /* Responsive backdrop blur */
+  .backdrop-blur-responsive {
+    backdrop-filter: blur(clamp(0px, 0.5vw, 10px));
+  }
+
+  /* Responsive z-index */
+  .z-responsive {
+    z-index: clamp(10, 5vw, 50);
+  }
+
+  /* Responsive line height */
+  .leading-responsive {
+    line-height: clamp(1.2, 0.2vw, 1.5);
+  }
+
+  /* Responsive letter spacing */
+  .tracking-responsive {
+    letter-spacing: clamp(-0.025em, 0.01vw, 0.025em);
+  }
+
+  /* Responsive border width */
+  .border-responsive {
+    border-width: clamp(1px, 0.2vw, 2px);
+  }
+
+  /* Responsive outline width */
+  .outline-responsive {
+    outline-width: clamp(1px, 0.2vw, 3px);
+  }
+
+  /* Responsive ring width */
+  .ring-responsive {
+    --tw-ring-width: clamp(0px, 0.2vw, 4px);
+  }
+
+  /* Responsive gap */
+  .gap-responsive {
+    gap: clamp(0.5rem, 2vw, 2rem);
+  }
+
+  /* Responsive inset */
+  .inset-responsive {
+    top: clamp(0.5rem, 2vw, 1rem);
+    right: clamp(0.5rem, 2vw, 1rem);
+    bottom: clamp(0.5rem, 2vw, 1rem);
+    left: clamp(0.5rem, 2vw, 1rem);
+  }
+
+  /* Responsive translate */
+  .translate-responsive {
+    transform: translateX(clamp(-1rem, -2vw, -2rem));
+  }
+
+  /* Responsive rotate */
+  .rotate-responsive {
+    transform: rotate(clamp(-5deg, -0.5deg, -10deg));
+  }
+
+  /* Responsive skew */
+  .skew-responsive {
+    transform: skewX(clamp(-5deg, -0.5deg, -10deg));
+  }
+
+  /* Responsive scale */
+  .scale-responsive {
+    transform: scale(clamp(0.9, 0.05vw, 1.1));
+  }
+
+  /* Responsive blur */
+  .blur-responsive {
+    filter: blur(clamp(0px, 0.1vw, 2px));
+  }
+
+  /* Responsive brightness */
+  .brightness-responsive {
+    filter: brightness(clamp(0.8, 0.1vw, 1.2));
+  }
+
+  /* Responsive contrast */
+  .contrast-responsive {
+    filter: contrast(clamp(0.8, 0.1vw, 1.2));
+  }
+
+  /* Responsive grayscale */
+  .grayscale-responsive {
+    filter: grayscale(clamp(0%, 0.5%, 100%));
+  }
+
+  /* Responsive hue-rotate */
+  .hue-rotate-responsive {
+    filter: hue-rotate(clamp(0deg, 1deg, 360deg));
+  }
+
+  /* Responsive saturate */
+  .saturate-responsive {
+    filter: saturate(clamp(0%, 5%, 200%));
+  }
+
+  /* Responsive sepia */
+  .sepia-responsive {
+    filter: sepia(clamp(0%, 0.5%, 100%));
+  }
+
+  /* Responsive drop shadow */
+  .drop-shadow-responsive {
+    filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
+  }
+
+  /* Responsive backdrop blur */
+  .backdrop-blur-responsive {
+    backdrop-filter: blur(clamp(0px, 0.2vw, 16px));
+  }
+
+  /* Responsive backdrop brightness */
+  .backdrop-brightness-responsive {
+    backdrop-filter: brightness(clamp(0.8, 0.05vw, 1.2));
+  }
+
+  /* Responsive backdrop contrast */
+  .backdrop-contrast-responsive {
+    backdrop-filter: contrast(clamp(0.8, 0.05vw, 1.2));
+  }
+
+  /* Responsive backdrop grayscale */
+  .backdrop-grayscale-responsive {
+    backdrop-filter: grayscale(clamp(0%, 0.25%, 100%));
+  }
+
+  /* Responsive backdrop hue-rotate */
+  .backdrop-hue-rotate-responsive {
+    backdrop-filter: hue-rotate(clamp(0deg, 0.5deg, 360deg));
+  }
+
+  /* Responsive backdrop invert */
+  .backdrop-invert-responsive {
+    backdrop-filter: invert(clamp(0%, 0.25%, 100%));
+  }
+
+  /* Responsive backdrop opacity */
+  .backdrop-opacity-responsive {
+    backdrop-filter: opacity(clamp(0%, 0.25%, 100%));
+  }
+
+  /* Responsive backdrop saturate */
+  .backdrop-saturate-responsive {
+    backdrop-filter: saturate(clamp(0%, 2.5%, 200%));
+  }
+
+  /* Responsive backdrop sepia */
+  .backdrop-sepia-responsive {
+    backdrop-filter: sepia(clamp(0%, 0.25%, 100%));
+  }
+
+  /* Responsive transition duration */
+  .duration-responsive {
+    transition-duration: clamp(150ms, 50ms, 300ms);
+  }
+
+  /* Responsive transition delay */
+  .delay-responsive {
+    transition-delay: clamp(0ms, 10ms, 100ms);
+  }
+
+  /* Responsive animation duration */
+  .animate-duration-responsive {
+    animation-duration: clamp(1s, 0.5s, 2s);
+  }
+
+  /* Responsive animation delay */
+  .animate-delay-responsive {
+    animation-delay: clamp(0s, 0.1s, 0.5s);
+  }
+
+  /* Responsive animation iteration count */
+  .animate-count-responsive {
+    animation-iteration-count: clamp(1, 0.5, 5);
+  }
+
+  /* Responsive animation direction */
+  .animate-direction-responsive {
+    animation-direction: alternate;
+  }
+
+  /* Responsive animation fill mode */
+  .animate-fill-responsive {
+    animation-fill-mode: both;
+  }
+
+  /* Responsive animation play state */
+  .animate-play-responsive {
+    animation-play-state: running;
+  }
+
+  /* Responsive animation timing function */
+  .animate-timing-responsive {
+    animation-timing-function: ease-in-out;
+  }
+
+  /* Responsive transform origin */
+  .origin-responsive {
+    transform-origin: clamp(50% 50%, 25% 25%, 75% 75%);
+  }
+
+  /* Responsive transform style */
+  .transform-style-responsive {
+    transform-style: preserve-3d;
+  }
+
+  /* Responsive perspective */
+  .perspective-responsive {
+    perspective: clamp(500px, 25vw, 1000px);
+  }
+
+  /* Responsive perspective origin */
+  .perspective-origin-responsive {
+    perspective-origin: clamp(50% 50%, 25% 25%, 75% 75%);
+  }
+
+  /* Responsive will-change */
+  .will-change-responsive {
+    will-change: transform, opacity;
+  }
+
+  /* Responsive content */
+  .content-responsive::before {
+    content: attr(data-responsive);
+  }
+
+  /* Responsive cursor */
+  .cursor-responsive {
+    cursor: pointer;
+  }
+
+  /* Responsive user select */
+  .select-responsive {
+    user-select: none;
+  }
+
+  /* Responsive pointer events */
+  .pointer-events-responsive {
+    pointer-events: auto;
+  }
+
+  /* Responsive resize */
+  .resize-responsive {
+    resize: both;
+  }
+
+  /* Responsive scroll behavior */
+  .scroll-responsive {
+    scroll-behavior: smooth;
+  }
+
+  /* Responsive scroll margin */
+  .scroll-m-responsive {
+    scroll-margin: clamp(0.5rem, 2vw, 1rem);
+  }
+
+  /* Responsive scroll padding */
+  .scroll-p-responsive {
+    scroll-padding: clamp(0.5rem, 2vw, 1rem);
+  }
+
+  /* Responsive scroll snap align */
+  .snap-align-responsive {
+    scroll-snap-align: start;
+  }
+
+  /* Responsive scroll snap stop */
+  .snap-stop-responsive {
+    scroll-snap-stop: normal;
+  }
+
+  /* Responsive scroll snap type */
+  .snap-type-responsive {
+    scroll-snap-type: y mandatory;
+  }
+
+  /* Responsive touch action */
+  .touch-responsive {
+    touch-action: manipulation;
+  }
+
+  /* Responsive transform box */
+  .transform-box-responsive {
+    transform-box: fill-box;
+  }
+
+  /* Responsive transform origin */
+  .transform-origin-responsive {
+    transform-origin: center;
+  }
+
+  /* Responsive transform style */
+  .transform-style-responsive {
+    transform-style: preserve-3d;
+  }
+
+  /* Responsive transition property */
+  .transition-responsive {
+    transition-property: all;
+  }
+
+  /* Responsive transition timing function */
+  .transition-timing-responsive {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Responsive transition duration */
+  .transition-duration-responsive {
+    transition-duration: 150ms;
+  }
+
+  /* Responsive transition delay */
+  .transition-delay-responsive {
+    transition-delay: 0ms;
+  }
+
+  /* Responsive accent color */
+  .accent-responsive {
+    accent-color: #3b82f6;
+  }
+
+  /* Responsive appearance */
+  .appearance-responsive {
+    appearance: none;
+  }
+
+  /* Responsive caret color */
+  .caret-responsive {
+    caret-color: #3b82f6;
+  }
+
+  /* Responsive color scheme */
+  .color-scheme-responsive {
+    color-scheme: light dark;
+  }
+
+  /* Responsive contain */
+  .contain-responsive {
+    contain: layout style;
+  }
+
+  /* Responsive content-visibility */
+  .content-visibility-responsive {
+    content-visibility: auto;
+  }
+
+  /* Responsive overscroll behavior */
+  .overscroll-responsive {
+    overscroll-behavior: auto;
+  }
+
+  /* Responsive text decoration color */
+  .decoration-responsive {
+    text-decoration-color: #3b82f6;
+  }
+
+  /* Responsive text decoration style */
+  .decoration-style-responsive {
+    text-decoration-style: solid;
+  }
+
+  /* Responsive text decoration thickness */
+  .decoration-thickness-responsive {
+    text-decoration-thickness: auto;
+  }
+
+  /* Responsive text underline offset */
+  .underline-offset-responsive {
+    text-underline-offset: 4px;
+  }
+
+  /* Responsive mix blend mode */
+  .mix-blend-responsive {
+    mix-blend-mode: normal;
+  }
+
+  /* Responsive background blend mode */
+  .bg-blend-responsive {
+    background-blend-mode: normal;
+  }
+
+  /* Responsive isolation */
+  .isolate-responsive {
+    isolation: isolate;
+  }
+
+  /* Responsive isolation */
+  .isolation-responsive {
+    isolation: auto;
+  }
+
+  /* Responsive isolation */
+  .isolation-isolate {
+    isolation: isolate;
+  }
+
+  /* Responsive isolation */
+  .isolation-auto {
+    isolation: auto;
+  }
+
+  /* Responsive isolation */
+  .isolation-inherit {
+    isolation: inherit;
+  }
+
+  /* Responsive isolation */
+  .isolation-initial {
+    isolation: initial;
+  }
+
+  /* Responsive isolation */
+  .isolation-revert {
+    isolation: revert;
+  }
+
+  /* Responsive isolation */
+  .isolation-unset {
+    isolation: unset;
+  }
+}
