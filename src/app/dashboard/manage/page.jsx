@@ -718,7 +718,7 @@ export default function ManageProducts() {
                               View
                             </Link>
                             <Link
-                              href={`/dashboard/add-products?id=${product._id}`}
+                              href={`/dashboard/add-product?id=${product._id}`}
                               className="px-3 py-2 text-slate-600 hover:bg-slate-50 rounded-lg transition-colors border border-slate-200/50"
                             >
                               Edit
