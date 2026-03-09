@@ -68,26 +68,21 @@ export default function Footer() {
                   {/* Main Text Container */}
                   <div className="flex items-baseline leading-none">
                     {/* NextGen Part */}
-                    <h1
-                      className="text-xl md:text-2xl font-bold tracking-tight bg-gradient-to-b from-blue-400 via-blue-600 to-blue-800 bg-clip-text text-transparent drop-shadow-lg"
-                      style={{
-                        filter: 'drop-shadow(0px 2px 2px rgba(0,0,0,0.5))',
-                      }}
-                    >
+                    <h1 className="text-xl md:text-2xl font-bold tracking-tight text-white">
                       NextGen
                     </h1>
 
                     {/* Vertical Separator */}
-                    <div className="mx-1 w-[3px] h-[20px] md:h-[24px] bg-gradient-to-b from-green-400 to-blue-500 rounded-full shadow-inner"></div>
+                    <div className="mx-1 w-[3px] h-[20px] md:h-[24px] bg-gray-400 rounded-full"></div>
 
                     {/* HUB Part */}
-                    <h1 className="text-xl md:text-2xl font-black tracking-tighter bg-gradient-to-b from-sky-300 to-sky-600 bg-clip-text text-transparent drop-shadow-md">
+                    <h1 className="text-xl md:text-2xl font-black tracking-tighter text-white">
                       HUB
                     </h1>
                   </div>
 
                   {/* Bottom Decorative Line */}
-                  <div className="w-[60%] h-[3px] mt-0.5 bg-gradient-to-r from-blue-500 via-green-400 to-green-500 rounded-sm shadow-lg"></div>
+                  <div className="w-[60%] h-[3px] mt-0.5 bg-gray-400 rounded-sm"></div>
                 </div>
               </div>
               <span className="sr-only">NextGen Hub</span>
