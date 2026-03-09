@@ -58,6 +58,7 @@ const handler = NextAuth({
     signIn: '/login',
     error: '/login', // Redirect to login page on error
     newUser: '/register', // Redirect new Google users to register page
+    signOut: '/', // Redirect to home page after logout
   },
   callbacks: {
     async signIn({ user, account, profile }) {
