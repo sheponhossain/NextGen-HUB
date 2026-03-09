@@ -198,27 +198,50 @@ export default function ProductsPage() {
         <section className="container mx-auto px-4 mb-12">
           <div className="flex flex-col lg:flex-row gap-6 items-center justify-center">
             {/* Search Bar */}
-            <div className="relative w-full max-w-md">
+            <div className="relative w-full max-w-lg">
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-indigo-500/10 rounded-full blur-xl"></div>
               <input
                 type="text"
-                placeholder="Search products..."
+                placeholder="Search products, features, or categories..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full px-6 py-4 pl-12 bg-white border-2 border-gray-200 rounded-full focus:border-blue-600 focus:outline-none text-lg font-medium transition-all duration-200 shadow-lg"
+                className="w-full px-8 py-4 pl-14 bg-white/80 backdrop-blur-sm border-2 border-gray-200 rounded-full focus:border-blue-500 focus:ring-4 focus:ring-blue-200 focus:outline-none text-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl hover:border-blue-300"
               />
-              <svg
-                className="absolute left-4 top-1/2 transform -translate-y-1/2 w-6 h-6 text-gray-400"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
+              <div className="absolute left-5 top-1/2 transform -translate-y-1/2 w-6 h-6 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full flex items-center justify-center">
+                <svg
+                  className="w-4 h-4 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={3}
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+              </div>
+              {searchTerm && (
+                <button
+                  onClick={() => setSearchTerm('')}
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 w-6 h-6 bg-gray-300 hover:bg-gray-400 rounded-full flex items-center justify-center transition-colors"
+                >
+                  <svg
+                    className="w-4 h-4 text-gray-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+              )}
             </div>
 
             {/* Category Filter */}
@@ -226,17 +249,27 @@ export default function ProductsPage() {
               {categories.map((cat) => (
                 <motion.button
                   key={cat.id}
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setFilter(cat.id)}
-                  className={`px-6 py-3 rounded-full font-semibold transition-all duration-200 flex items-center gap-2 ${
+                  className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 flex items-center gap-3 ${
                     filter === cat.id
-                      ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg'
-                      : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-blue-600'
+                      ? 'bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white shadow-2xl shadow-blue-500/25 transform hover:scale-105'
+                      : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-200/50 hover:-translate-y-1'
                   }`}
                 >
-                  <span className="text-lg">{cat.icon}</span>
-                  {cat.label}
+                  <div
+                    className={`w-8 h-8 rounded-full flex items-center justify-center text-lg transition-all duration-300 ${
+                      filter === cat.id
+                        ? 'bg-white/20 backdrop-blur-sm'
+                        : 'bg-gray-100'
+                    }`}
+                  >
+                    {cat.icon}
+                  </div>
+                  <span className="text-sm font-medium tracking-wide">
+                    {cat.label}
+                  </span>
                 </motion.button>
               ))}
             </div>
