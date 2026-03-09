@@ -226,6 +226,7 @@ export default function Navbar() {
           </Link>
         </motion.div>
 
+        {/* Desktop Navigation */}
         <div className="hidden md:flex space-x-8 items-center">
           {[
             { path: '/', label: 'Home' },
@@ -257,7 +258,98 @@ export default function Navbar() {
           })}
         </div>
 
-        <div className="flex items-center gap-4">
+        {/* Mobile Menu Button */}
+        <div className="md:hidden flex items-center gap-4">
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="p-2 rounded-md hover:bg-white/20 transition-colors"
+            aria-label="Toggle menu"
+          >
+            <motion.div
+              animate={isOpen ? { rotate: 180 } : { rotate: 0 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+            >
+              {isOpen ? (
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                </svg>
+              )}
+            </motion.div>
+          </button>
+          <UserDropdown />
+        </div>
+
+        {/* Mobile Navigation Menu */}
+        <motion.div
+          initial={{ opacity: 0, height: 0 }}
+          animate={
+            isOpen ? { opacity: 1, height: 'auto' } : { opacity: 0, height: 0 }
+          }
+          transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+          className="md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-xl border-b border-white/30 shadow-xl overflow-hidden"
+        >
+          <div className="py-4 px-6 space-y-2">
+            {[
+              { path: '/', label: 'Home' },
+              { path: '/products', label: 'Products' },
+              { path: '/about', label: 'About' },
+              { path: '/contact', label: 'Contact' },
+            ].map((item, idx) => {
+              const isActive =
+                item.path === '/'
+                  ? pathname === '/'
+                  : pathname.startsWith(item.path);
+              return (
+                <Link key={idx} href={item.path}>
+                  <motion.div
+                    whileHover={{ x: 4, backgroundColor: '#f8fafc' }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => setIsOpen(false)}
+                    className={`block py-3 px-4 rounded-lg transition-colors ${
+                      isActive
+                        ? 'bg-blue-50 text-blue-600'
+                        : 'text-gray-700 hover:bg-gray-50'
+                    }`}
+                  >
+                    <span className="flex items-center gap-3">
+                      <span
+                        className={`w-2 h-2 rounded-full ${isActive ? 'bg-blue-500' : 'bg-gray-300'}`}
+                      ></span>
+                      {item.label}
+                    </span>
+                  </motion.div>
+                </Link>
+              );
+            })}
+          </div>
+        </motion.div>
+
+        {/* Desktop User Dropdown */}
+        <div className="hidden md:flex items-center gap-4">
           <UserDropdown />
         </div>
       </div>
