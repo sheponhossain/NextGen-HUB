@@ -110,7 +110,9 @@ const handler = NextAuth({
       return session;
     },
   },
-  secret: process.env.NEXTAUTH_SECRET || 'your-secret-key-here',
+  secret:
+    process.env.NEXTAUTH_SECRET ||
+    '7NgALvelrtw/Cfy8x+I0h34n7oWrHC12AKmOGhyddP0=',
   session: {
     strategy: 'jwt',
     maxAge: 30 * 24 * 60 * 60, // 30 days
