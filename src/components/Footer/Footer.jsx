@@ -9,6 +9,8 @@ import {
   Twitter,
   Instagram,
   Linkedin,
+  MessageCircle,
+  Headphones,
   ArrowUp,
 } from 'lucide-react';
 
@@ -245,15 +247,16 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Scroll to Top Button */}
+      {/* Customer Support Button */}
       <motion.button
-        onClick={scrollToTop}
+        onClick={() => window.open('https://wa.me/8801234567890', '_blank')}
         initial={{ opacity: 0, scale: 0.5 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
-        className="fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+        className="fixed bottom-8 right-8 w-12 h-12 bg-green-500 text-white rounded-full shadow-lg hover:shadow-green-500/25 transition-all duration-300 hover:-translate-y-1"
+        title="Chat with us on WhatsApp"
       >
-        <ArrowUp size={20} />
+        <MessageCircle size={20} />
       </motion.button>
     </footer>
   );
