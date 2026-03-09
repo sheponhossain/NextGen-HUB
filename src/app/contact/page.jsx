@@ -145,7 +145,7 @@ export default function ContactPage() {
                   onChange={handleChange}
                   placeholder="John Doe"
                   required
-                  className="w-full px-5 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition"
+                  className="w-full px-5 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition text-gray-900"
                 />
               </div>
 
@@ -160,7 +160,7 @@ export default function ContactPage() {
                   onChange={handleChange}
                   placeholder="john@example.com"
                   required
-                  className="w-full px-5 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition"
+                  className="w-full px-5 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition text-gray-900"
                 />
               </div>
 
@@ -175,7 +175,7 @@ export default function ContactPage() {
                   onChange={handleChange}
                   placeholder="How can we help?"
                   required
-                  className="w-full px-5 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition"
+                  className="w-full px-5 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition text-gray-900"
                 />
               </div>
 
@@ -190,7 +190,7 @@ export default function ContactPage() {
                   placeholder="Tell us what's on your mind..."
                   rows={5}
                   required
-                  className="w-full px-5 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition resize-none"
+                  className="w-full px-5 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition resize-none text-gray-900"
                 />
               </div>
 

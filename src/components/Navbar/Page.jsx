@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 
 function UserDropdown() {
   const { data: session, status } = useSession();
@@ -153,7 +153,7 @@ function UserDropdown() {
               className="px-4 py-2 text-sm text-red-600 hover:text-red-700 cursor-pointer flex items-center gap-3"
               onClick={() => {
                 setDropdownOpen(false);
-                window.location.href = '/api/auth/signout';
+                window.location.href = '/api/auth/signout?callbackUrl=/';
               }}
             >
               <span className="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center">
