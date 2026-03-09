@@ -25,7 +25,7 @@ export default function ManageProducts() {
 
   const handleEdit = async (id, updatedData) => {
     try {
-      const res = await fetch(`/api/product/${id}`, {
+      const res = await fetch(`/api/product/${_id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
