@@ -4,7 +4,6 @@ A powerful Next.js dashboard for managing products and inventory with cutting-ed
 
 ## 🚀 Features
 
-- **Modern Dashboard**: Clean, responsive design with dark theme
 - **Product Management**: Full CRUD operations for products
 - **Authentication**: Secure Google OAuth integration
 - **File Upload**: Cloudinary integration for image uploads
