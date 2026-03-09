@@ -154,9 +154,9 @@ export default function Footer() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="bg-gradient-to-r from-blue-900/20 to-purple-900/20 border border-blue-500/20 rounded-2xl p-8 mb-8 backdrop-blur-sm"
+          className="bg-gray-800 border border-gray-700 rounded-xl p-6 mb-8"
         >
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="md:col-span-2">
               <h4 className="text-white text-lg font-semibold mb-2">
                 Stay Updated
@@ -166,13 +166,13 @@ export default function Footer() {
                 and exclusive content.
               </p>
             </div>
-            <div className="flex gap-3">
+            <div className="flex gap-2">
               <input
                 type="email"
                 placeholder="Your email address"
-                className="flex-1 px-4 py-3 bg-white/10 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 transition"
+                className="flex-1 px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-gray-500 transition"
               />
-              <button className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg font-medium hover:shadow-lg hover:shadow-blue-500/25 transition transform hover:-translate-y-1">
+              <button className="px-4 py-3 bg-gray-700 text-white rounded-lg font-medium hover:bg-gray-600 transition transform hover:-translate-y-0.5">
                 Subscribe
               </button>
             </div>
