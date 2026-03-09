@@ -60,7 +60,7 @@ export default function ProductsPage() {
     const fetchProducts = async () => {
       try {
         setLoading(true);
-        const res = await fetch('/api/products');
+        const res = await fetch('/api/products-public');
         if (!res.ok) {
           throw new Error('Failed to fetch products');
         }
