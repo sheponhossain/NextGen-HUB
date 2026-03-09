@@ -202,7 +202,7 @@ export default function ProductsPage() {
               <div className="absolute inset-0 bg-gradient-to-r from-blue-400/15 via-purple-400/15 to-pink-400/15 rounded-2xl blur-2xl"></div>
 
               {/* Main Container */}
-              <div className="relative bg-white/60 backdrop-blur-xl border border-white/20 rounded-2xl p-6 shadow-2xl shadow-blue-500/10">
+              <div className="relative bg-white/60 backdrop-blur-xl border border-white/20 rounded-2xl p-6 shadow-2xl shadow-blue-500/10 z-40">
                 {/* Search Bar with Dropdown */}
                 <div className="relative">
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-indigo-500/10 rounded-full blur-xl"></div>
@@ -286,7 +286,7 @@ export default function ProductsPage() {
                     placeholder="Search products, features, or categories..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full px-24 py-4 pl-28 bg-white/80 backdrop-blur-sm border-2 border-gray-200 rounded-full focus:border-blue-500 focus:ring-4 focus:ring-blue-200 focus:outline-none text-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl hover:border-blue-300"
+                    className="w-full px-24 py-4 pl-32 bg-white/80 backdrop-blur-sm border-2 border-gray-200 rounded-full focus:border-blue-500 focus:ring-4 focus:ring-blue-200 focus:outline-none text-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl hover:border-blue-300"
                   />
 
                   <div className="absolute left-20 top-1/2 transform -translate-y-1/2 w-6 h-6 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full flex items-center justify-center">
