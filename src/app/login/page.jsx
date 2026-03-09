@@ -25,7 +25,6 @@ export default function LoginPage() {
         router.push('/');
         router.refresh();
       } else {
-        alert('Invalid Credentials! Try demo@example.com / demopassword123');
         setLoading(false);
       }
     } catch (error) {

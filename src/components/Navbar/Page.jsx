@@ -151,9 +151,12 @@ function UserDropdown() {
               whileHover={{ backgroundColor: '#fef2f2', x: 4 }}
               transition={{ type: 'spring', stiffness: 300, damping: 20 }}
               className="px-4 py-2 text-sm text-red-600 hover:text-red-700 cursor-pointer flex items-center gap-3"
-              onClick={() => {
+              onClick={async () => {
                 setDropdownOpen(false);
-                window.location.href = '/api/auth/signout?callbackUrl=/';
+                await signOut({
+                  callbackUrl: '/',
+                  redirect: true,
+                });
               }}
             >
               <span className="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center">
