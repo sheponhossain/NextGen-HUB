@@ -248,16 +248,44 @@ export default function Footer() {
       </div>
 
       {/* Customer Support Button */}
-      <motion.button
-        onClick={() => window.open('https://wa.me/8801234567890', '_blank')}
+      <motion.div
         initial={{ opacity: 0, scale: 0.5 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
-        className="fixed bottom-8 right-8 w-12 h-12 bg-green-500 text-white rounded-full shadow-lg hover:shadow-green-500/25 transition-all duration-300 hover:-translate-y-1"
-        title="Chat with us on WhatsApp"
+        className="fixed bottom-8 right-8"
       >
-        <MessageCircle size={20} />
-      </motion.button>
+        {/* Floating Chat Widget */}
+        <div className="relative">
+          {/* Chat Bubble */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
+            className="absolute -top-16 -right-2 bg-white text-gray-800 px-4 py-2 rounded-lg shadow-lg text-sm font-medium border border-gray-200"
+          >
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+              <span>Need help? Chat with us!</span>
+            </div>
+          </motion.div>
+
+          {/* Customer Support Button */}
+          <button
+            onClick={() => window.open('https://wa.me/8801234567890', '_blank')}
+            className="w-14 h-14 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-full shadow-lg hover:shadow-green-500/25 transition-all duration-300 hover:-translate-y-1 flex items-center justify-center group"
+            title="Chat with our support team"
+          >
+            <div className="relative">
+              {/* Avatar */}
+              <div className="w-8 h-8 bg-gradient-to-br from-pink-400 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-md">
+                S
+              </div>
+              {/* Online indicator */}
+              <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-green-400 border-2 border-white rounded-full"></div>
+            </div>
+          </button>
+        </div>
+      </motion.div>
     </footer>
   );
 }
