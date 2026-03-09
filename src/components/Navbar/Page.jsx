@@ -147,19 +147,20 @@ function UserDropdown() {
           </div>
 
           <div className="border-t border-gray-100 mt-2 pt-2">
-            <Link href="/api/auth/signout">
-              <motion.div
-                whileHover={{ backgroundColor: '#fef2f2', x: 4 }}
-                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                className="px-4 py-2 text-sm text-red-600 hover:text-red-700 cursor-pointer flex items-center gap-3"
-                onClick={() => setDropdownOpen(false)}
-              >
-                <span className="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center">
-                  <span>🚪</span>
-                </span>
-                Sign Out
-              </motion.div>
-            </Link>
+            <motion.div
+              whileHover={{ backgroundColor: '#fef2f2', x: 4 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+              className="px-4 py-2 text-sm text-red-600 hover:text-red-700 cursor-pointer flex items-center gap-3"
+              onClick={() => {
+                setDropdownOpen(false);
+                window.location.href = '/api/auth/signout';
+              }}
+            >
+              <span className="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center">
+                <span>🚪</span>
+              </span>
+              Sign Out
+            </motion.div>
           </div>
         </motion.div>
       )}
