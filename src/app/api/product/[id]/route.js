@@ -1,10 +1,22 @@
 import connectDB from '@/lib/mongodb';
 import Product from '@/lib/models/Product';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { NextResponse } from 'next/server';
 
 export async function GET(req, { params }) {
   try {
     await connectDB();
+
+    // Get session to identify the user
+    const session = await getServerSession(authOptions);
+    if (!session) {
+      return NextResponse.json(
+        { success: false, error: 'Authentication required' },
+        { status: 401 }
+      );
+    }
+
     const { id } = await params;
     const product = await Product.findById(id);
 
@@ -12,6 +24,17 @@ export async function GET(req, { params }) {
       return NextResponse.json(
         { success: false, error: 'Product not found' },
         { status: 404 }
+      );
+    }
+
+    // Check if the product belongs to the current user
+    if (product.createdBy !== session.user.email) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'Unauthorized: You can only view your own products',
+        },
+        { status: 403 }
       );
     }
 
@@ -27,6 +50,16 @@ export async function GET(req, { params }) {
 export async function DELETE(req, { params }) {
   try {
     await connectDB();
+
+    // Get session to identify the user
+    const session = await getServerSession(authOptions);
+    if (!session) {
+      return NextResponse.json(
+        { success: false, error: 'Authentication required' },
+        { status: 401 }
+      );
+    }
+
     const { id } = await params;
     const product = await Product.findByIdAndDelete(id);
 
@@ -34,6 +67,17 @@ export async function DELETE(req, { params }) {
       return NextResponse.json(
         { success: false, error: 'Product not found' },
         { status: 404 }
+      );
+    }
+
+    // Check if the product belongs to the current user
+    if (product.createdBy !== session.user.email) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'Unauthorized: You can only delete your own products',
+        },
+        { status: 403 }
       );
     }
 
@@ -52,6 +96,16 @@ export async function DELETE(req, { params }) {
 export async function PUT(req, { params }) {
   try {
     await connectDB();
+
+    // Get session to identify the user
+    const session = await getServerSession(authOptions);
+    if (!session) {
+      return NextResponse.json(
+        { success: false, error: 'Authentication required' },
+        { status: 401 }
+      );
+    }
+
     const { id } = await params;
     const body = await req.json();
 
@@ -105,6 +159,25 @@ export async function PUT(req, { params }) {
           error: `Invalid price value: "${body.price}". Price must be a positive number.`,
         },
         { status: 400 }
+      );
+    }
+
+    // Check if the product exists and belongs to the current user
+    const product = await Product.findById(id);
+    if (!product) {
+      return NextResponse.json(
+        { success: false, error: 'Product not found' },
+        { status: 404 }
+      );
+    }
+
+    if (product.createdBy !== session.user.email) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'Unauthorized: You can only edit your own products',
+        },
+        { status: 403 }
       );
     }
 

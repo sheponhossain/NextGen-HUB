@@ -1,10 +1,22 @@
 import connectDB from '@/lib/mongodb';
 import Product from '@/lib/models/Product'; // Mongoose model
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { NextResponse } from 'next/server';
 
 export async function POST(req) {
   try {
     await connectDB();
+
+    // Get session to identify the user
+    const session = await getServerSession(authOptions);
+    if (!session) {
+      return NextResponse.json(
+        { success: false, error: 'Authentication required' },
+        { status: 401 }
+      );
+    }
+
     const body = await req.json();
 
     // Validate required fields with more descriptive error messages
@@ -71,7 +83,7 @@ export async function POST(req) {
       );
     }
 
-    // Create product with explicit data types
+    // Create product with explicit data types and user association
     const now = new Date();
     const productData = {
       title: String(body.title).trim(),
@@ -85,6 +97,7 @@ export async function POST(req) {
         : '📦 All Products',
       sku: body.sku ? String(body.sku).trim() : '',
       imageUrl: body.imageUrl ? String(body.imageUrl).trim() : '',
+      createdBy: session.user.email, // Associate product with user
       createdAt: now,
       updatedAt: now,
     };
@@ -113,7 +126,20 @@ export async function POST(req) {
 export async function GET() {
   try {
     await connectDB();
-    const products = await Product.find({}).sort({ createdAt: -1 });
+
+    // Get session to identify the user
+    const session = await getServerSession(authOptions);
+    if (!session) {
+      return NextResponse.json(
+        { success: false, error: 'Authentication required' },
+        { status: 401 }
+      );
+    }
+
+    // Filter products by the current user
+    const products = await Product.find({ createdBy: session.user.email }).sort(
+      { createdAt: -1 }
+    );
     return NextResponse.json({ success: true, data: products });
   } catch (error) {
     return NextResponse.json({ success: false }, { status: 400 });
@@ -123,8 +149,18 @@ export async function GET() {
 export async function DELETE(req, { params }) {
   try {
     await connectDB();
+
+    // Get session to identify the user
+    const session = await getServerSession(authOptions);
+    if (!session) {
+      return NextResponse.json(
+        { success: false, error: 'Authentication required' },
+        { status: 401 }
+      );
+    }
+
     const { id } = params;
-    const product = await Product.findByIdAndDelete(id);
+    const product = await Product.findById(id);
 
     if (!product) {
       return NextResponse.json(
@@ -132,6 +168,19 @@ export async function DELETE(req, { params }) {
         { status: 404 }
       );
     }
+
+    // Check if the product belongs to the current user
+    if (product.createdBy !== session.user.email) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'Unauthorized: You can only delete your own products',
+        },
+        { status: 403 }
+      );
+    }
+
+    await Product.findByIdAndDelete(id);
 
     return NextResponse.json({
       success: true,

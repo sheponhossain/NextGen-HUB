@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
+import Link from 'next/link';
 
 export default function AddProduct() {
   const { data: session, status } = useSession();
@@ -575,13 +576,12 @@ export default function AddProduct() {
         </div>
 
         <div className="flex gap-4 pt-6">
-          <button
-            type="button"
-            onClick={() => router.push('/dashboard/manage')}
-            className="flex-1 bg-gray-100 text-gray-700 py-3 px-6 rounded-lg font-medium hover:bg-gray-200 transition-all duration-200 transform hover:scale-105"
+          <Link
+            href="/dashboard/manage"
+            className="flex-1 bg-gray-100 text-gray-700 py-3 px-6 rounded-lg font-medium hover:bg-gray-200 transition-all duration-200 transform hover:scale-105 text-center"
           >
             Cancel
-          </button>
+          </Link>
           <button
             type="submit"
             disabled={loading}
