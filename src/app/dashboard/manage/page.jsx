@@ -17,7 +17,7 @@ export default function ManageProducts() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(10);
-  const { status } = useSession();
+  const { data: session, status } = useSession();
   const router = useRouter();
 
   // Redirect if not logged in
@@ -52,7 +52,16 @@ export default function ManageProducts() {
   const fetchProducts = async () => {
     const res = await fetch('/api/products');
     const data = await res.json();
-    if (data.success) setProducts(data.data);
+    if (data.success) {
+      // Filter products to show only those created by the current user
+      const userProducts = data.data.filter(
+        (product) =>
+          product.createdBy === session?.user?.email ||
+          product.createdBy === session?.user?.name ||
+          !product.createdBy // For backward compatibility with existing products
+      );
+      setProducts(userProducts);
+    }
     setLoading(false);
   };
 

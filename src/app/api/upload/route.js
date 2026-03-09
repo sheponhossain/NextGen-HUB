@@ -42,7 +42,7 @@ export async function POST(request) {
     const base64Image = buffer.toString('base64');
 
     // Upload to ImgBB
-    const imgbbApiKey = process.env.IMGBB_API_KEY;
+    const imgbbApiKey = '02ede86040a806d18640942ecc23f6cc';
     if (!imgbbApiKey) {
       return NextResponse.json(
         {
