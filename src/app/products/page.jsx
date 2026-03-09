@@ -286,7 +286,7 @@ export default function ProductsPage() {
                     placeholder="Search products, features, or categories..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full px-24 py-4 pl-32 bg-white/90 backdrop-blur-sm border-2 border-gray-200 rounded-full focus:border-blue-500 focus:ring-4 focus:ring-blue-200 focus:outline-none text-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl hover:border-blue-300 text-gray-900 placeholder-gray-500"
+                    className="w-full px-24 py-4 pl-48 bg-white/90 backdrop-blur-sm border-2 border-gray-200 rounded-full focus:border-blue-500 focus:ring-4 focus:ring-blue-200 focus:outline-none text-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl hover:border-blue-300 text-gray-900 placeholder-gray-500"
                   />
 
                   <div className="absolute left-20 top-1/2 transform -translate-y-1/2 w-6 h-6 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full flex items-center justify-center">
