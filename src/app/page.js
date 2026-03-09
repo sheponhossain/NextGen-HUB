@@ -659,13 +659,13 @@ export default function LandingPage() {
             <div className="flex justify-center gap-4 mt-8">
               <button
                 onClick={() => prevTestimonial(testimonials.length)}
-                className="bg-white p-2 rounded-full shadow-md hover:bg-gray-100"
+                className="bg-white p-2 rounded-full shadow-md hover:bg-gray-100 cursor-pointer"
               >
                 ‹
               </button>
               <button
                 onClick={() => nextTestimonial(testimonials.length)}
-                className="bg-white p-2 rounded-full shadow-md hover:bg-gray-100"
+                className="bg-white p-2 rounded-full shadow-md hover:bg-gray-100 cursor-pointer"
               >
                 ›
               </button>
@@ -695,7 +695,7 @@ export default function LandingPage() {
           </motion.div>
 
           {/* FAQ Accordion */}
-          <div className="space-y-4">
+          <div className="space-y-4 ">
             {[
               {
                 q: 'How do I start with your platform?',
@@ -879,7 +879,7 @@ export default function LandingPage() {
                   ))}
                 </ul>
                 <button
-                  className={`w-full py-3 rounded-lg font-semibold ${plan.name === 'Business' ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white' : 'border-2 border-gray-200 text-gray-700'}`}
+                  className={`w-full py-3 rounded-lg font-semibold ${plan.name === 'Business' ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white' : 'border-2 border-gray-200 text-gray-700'} cursor-pointer`}
                 >
                   {plan.name === 'Enterprise'
                     ? 'Contact Sales'

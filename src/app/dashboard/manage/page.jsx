@@ -15,6 +15,8 @@ export default function ManageProducts() {
   const [sortBy, setSortBy] = useState('date');
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage] = useState(10);
   const { status } = useSession();
   const router = useRouter();
 
@@ -485,7 +487,7 @@ export default function ManageProducts() {
         <div className="flex gap-4 mt-6">
           <button
             onClick={handleExportData}
-            className="px-6 py-3 bg-white text-slate-800 rounded-lg font-semibold hover:bg-slate-100 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1 border border-slate-200"
+            className="cursor-pointer px-6 py-3 bg-white text-slate-800 rounded-lg font-semibold hover:bg-slate-100 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1 border border-slate-200"
           >
             <div className="flex items-center gap-2">
               <svg
@@ -527,7 +529,7 @@ export default function ManageProducts() {
           </Link>
           <button
             onClick={handleBulkImport}
-            className="px-6 py-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-lg font-semibold hover:from-green-700 hover:to-emerald-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1 border border-green-500/30"
+            className="cursor-pointer px-6 py-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-lg font-semibold hover:from-green-700 hover:to-emerald-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1 border border-green-500/30"
           >
             <div className="flex items-center gap-2">
               <svg
@@ -638,84 +640,89 @@ export default function ManageProducts() {
               </thead>
               <tbody>
                 <AnimatePresence>
-                  {filteredProducts.map((product, index) => (
-                    <motion.tr
-                      key={product._id}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      transition={{ delay: index * 0.05 }}
-                      className="border-t border-slate-200/50 hover:bg-slate-50/50 transition-colors"
-                    >
-                      <td className="p-4">
-                        <div className="flex items-center gap-3">
-                          <div className="w-12 h-12 bg-gradient-to-br from-slate-100 to-blue-100 rounded-lg flex items-center justify-center shadow-sm border border-slate-200/50">
-                            {product.imageUrl ? (
-                              <img
-                                src={product.imageUrl}
-                                alt={product.title}
-                                className="w-full h-full object-cover rounded-lg"
-                              />
-                            ) : (
-                              <span className="text-slate-500">No Image</span>
-                            )}
+                  {filteredProducts
+                    .slice(
+                      (currentPage - 1) * productsPerPage,
+                      currentPage * productsPerPage
+                    )
+                    .map((product, index) => (
+                      <motion.tr
+                        key={product._id}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ delay: index * 0.05 }}
+                        className="border-t border-slate-200/50 hover:bg-slate-50/50 transition-colors"
+                      >
+                        <td className="p-4">
+                          <div className="flex items-center gap-3">
+                            <div className="w-12 h-12 bg-gradient-to-br from-slate-100 to-blue-100 rounded-lg flex items-center justify-center shadow-sm border border-slate-200/50">
+                              {product.imageUrl ? (
+                                <img
+                                  src={product.imageUrl}
+                                  alt={product.title}
+                                  className="w-full h-full object-cover rounded-lg"
+                                />
+                              ) : (
+                                <span className="text-slate-500">No Image</span>
+                              )}
+                            </div>
+                            <div>
+                              <h3 className="font-medium text-slate-900">
+                                {product.title}
+                              </h3>
+                              <p className="text-sm text-slate-500">
+                                ID: {product._id.slice(-6)}
+                              </p>
+                            </div>
                           </div>
-                          <div>
-                            <h3 className="font-medium text-slate-900">
-                              {product.title}
-                            </h3>
-                            <p className="text-sm text-slate-500">
-                              ID: {product._id.slice(-6)}
-                            </p>
+                        </td>
+                        <td className="p-4">
+                          <p className="text-slate-700 max-w-md truncate">
+                            {product.shortDescription ||
+                              product.fullDescription ||
+                              'No description'}
+                          </p>
+                        </td>
+                        <td className="p-4">
+                          <span className="font-semibold text-slate-900">
+                            ${product.price?.toFixed(2) || '0.00'}
+                          </span>
+                        </td>
+                        <td className="p-4">
+                          <span
+                            className={`px-3 py-1 rounded-full text-xs font-medium ${getPriorityColor(product.priority)}`}
+                          >
+                            {(product.priority || 'Medium').toUpperCase()}
+                          </span>
+                        </td>
+                        <td className="p-4 text-slate-600">
+                          {formatDate(product.createdAt || product._id)}
+                        </td>
+                        <td className="p-4">
+                          <div className="flex justify-center gap-2">
+                            <Link
+                              href={`/details/${product._id}`}
+                              className="px-3 py-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors border border-slate-200/50"
+                            >
+                              View
+                            </Link>
+                            <Link
+                              href={`/dashboard/add-product?id=${product._id}`}
+                              className="px-3 py-2 text-slate-600 hover:bg-slate-50 rounded-lg transition-colors border border-slate-200/50"
+                            >
+                              Edit
+                            </Link>
+                            <button
+                              onClick={() => handleDelete(product._id)}
+                              className="cursor-pointer px-3 py-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors border border-slate-200/50"
+                            >
+                              Delete
+                            </button>
                           </div>
-                        </div>
-                      </td>
-                      <td className="p-4">
-                        <p className="text-slate-700 max-w-md truncate">
-                          {product.shortDescription ||
-                            product.fullDescription ||
-                            'No description'}
-                        </p>
-                      </td>
-                      <td className="p-4">
-                        <span className="font-semibold text-slate-900">
-                          ${product.price?.toFixed(2) || '0.00'}
-                        </span>
-                      </td>
-                      <td className="p-4">
-                        <span
-                          className={`px-3 py-1 rounded-full text-xs font-medium ${getPriorityColor(product.priority)}`}
-                        >
-                          {(product.priority || 'Medium').toUpperCase()}
-                        </span>
-                      </td>
-                      <td className="p-4 text-slate-600">
-                        {formatDate(product.createdAt || product._id)}
-                      </td>
-                      <td className="p-4">
-                        <div className="flex justify-center gap-2">
-                          <Link
-                            href={`/details/${product._id}`}
-                            className="px-3 py-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors border border-slate-200/50"
-                          >
-                            View
-                          </Link>
-                          <Link
-                            href={`/dashboard/add-product?id=${product._id}`}
-                            className="px-3 py-2 text-slate-600 hover:bg-slate-50 rounded-lg transition-colors border border-slate-200/50"
-                          >
-                            Edit
-                          </Link>
-                          <button
-                            onClick={() => handleDelete(product._id)}
-                            className="px-3 py-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors border border-slate-200/50"
-                          >
-                            Delete
-                          </button>
-                        </div>
-                      </td>
-                    </motion.tr>
-                  ))}
+                        </td>
+                      </motion.tr>
+                    ))}
                 </AnimatePresence>
               </tbody>
             </table>
@@ -744,6 +751,51 @@ export default function ManageProducts() {
               <p className="text-slate-600">
                 Try adjusting your search or filter criteria.
               </p>
+            </div>
+          )}
+
+          {/* Pagination */}
+          {filteredProducts.length > productsPerPage && (
+            <div className="flex justify-center items-center gap-4 mt-6 p-6 border-t border-slate-200/50 bg-slate-50/50">
+              <button
+                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                disabled={currentPage === 1}
+                className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+                  currentPage === 1
+                    ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                    : 'bg-blue-600 text-white hover:bg-blue-700'
+                }`}
+              >
+                Previous
+              </button>
+
+              <span className="px-4 py-2 text-gray-600 font-medium">
+                Page {currentPage} of{' '}
+                {Math.ceil(filteredProducts.length / productsPerPage)}
+              </span>
+
+              <button
+                onClick={() =>
+                  setCurrentPage((prev) =>
+                    Math.min(
+                      prev + 1,
+                      Math.ceil(filteredProducts.length / productsPerPage)
+                    )
+                  )
+                }
+                disabled={
+                  currentPage ===
+                  Math.ceil(filteredProducts.length / productsPerPage)
+                }
+                className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+                  currentPage ===
+                  Math.ceil(filteredProducts.length / productsPerPage)
+                    ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                    : 'bg-blue-600 text-white hover:bg-blue-700'
+                }`}
+              >
+                Next
+              </button>
             </div>
           )}
         </div>

@@ -48,7 +48,7 @@ export default function ProductDetails() {
       <div className="max-w-5xl mx-auto p-6 mt-10">
         <motion.button
           onClick={() => router.back()}
-          className="mb-6 flex items-center gap-2 text-blue-600 hover:underline"
+          className="mb-6 flex items-center gap-2 text-blue-600 hover:underline cursor-pointer"
         >
           ← Back to Products
         </motion.button>
@@ -68,7 +68,7 @@ export default function ProductDetails() {
     <div className="max-w-5xl mx-auto p-6 mt-10">
       <motion.button
         onClick={() => router.back()}
-        className="mb-6 flex items-center gap-2 text-blue-600 hover:underline"
+        className="mb-6 flex items-center gap-2 text-blue-600 hover:underline cursor-pointer"
       >
         ← Back to Products
       </motion.button>

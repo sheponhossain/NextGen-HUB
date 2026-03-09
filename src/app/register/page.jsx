@@ -193,7 +193,7 @@ export default function RegisterPage() {
         >
           <Link
             href="/login"
-            className="text-sm font-medium text-blue-600 hover:text-blue-500 underline decoration-2 underline-offset-4 transition-colors"
+            className="text-sm font-medium text-blue-600 hover:text-blue-500 underline decoration-2 underline-offset-4 transition-colors cursor-pointer"
           >
             Already have an account? Login
           </Link>

@@ -20,6 +20,8 @@ export default function ProductsPage() {
   const [error, setError] = useState(null);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [productToDelete, setProductToDelete] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage] = useState(12);
 
   const handleDelete = async (id) => {
     setShowDeleteConfirm(true);
@@ -148,13 +150,13 @@ export default function ProductsPage() {
             <div className="flex gap-4">
               <button
                 onClick={confirmDelete}
-                className="flex-1 bg-red-600 text-white py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors"
+                className="cursor-pointer flex-1 bg-red-600 text-white py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors"
               >
                 Confirm
               </button>
               <button
                 onClick={cancelDelete}
-                className="flex-1 bg-gray-300 text-gray-700 py-3 rounded-lg font-semibold hover:bg-gray-400 transition-colors"
+                className="cursor-pointer flex-1 bg-gray-300 text-gray-700 py-3 rounded-lg font-semibold hover:bg-gray-400 transition-colors"
               >
                 Cancel
               </button>
@@ -249,28 +251,33 @@ export default function ProductsPage() {
               layout
               className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
             >
-              {filteredProducts.map((product, idx) => (
-                <motion.div
-                  key={product.id}
-                  layout
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
-                >
-                  <div className="relative h-full">
-                    <Card
-                      href={`/details/${product.id}`}
-                      title={product.title}
-                      description={product.description}
-                      price={product.price}
-                      badge={product.badge}
-                      imageUrl={product.imageUrl}
-                      onDelete={() => handleDelete(product.id)}
-                    />
-                  </div>
-                </motion.div>
-              ))}
+              {filteredProducts
+                .slice(
+                  (currentPage - 1) * productsPerPage,
+                  currentPage * productsPerPage
+                )
+                .map((product, idx) => (
+                  <motion.div
+                    key={product.id}
+                    layout
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: idx * 0.1 }}
+                  >
+                    <div className="relative h-full">
+                      <Card
+                        href={`/details/${product.id}`}
+                        title={product.title}
+                        description={product.description}
+                        price={product.price}
+                        badge={product.badge}
+                        imageUrl={product.imageUrl}
+                        onDelete={() => handleDelete(product.id)}
+                      />
+                    </div>
+                  </motion.div>
+                ))}
             </motion.div>
 
             {filteredProducts.length === 0 && (
@@ -283,6 +290,53 @@ export default function ProductsPage() {
                   No products found. Add some products to get started!
                 </p>
               </motion.div>
+            )}
+
+            {/* Pagination */}
+            {filteredProducts.length > productsPerPage && (
+              <div className="flex justify-center items-center gap-4 mt-12">
+                <button
+                  onClick={() =>
+                    setCurrentPage((prev) => Math.max(prev - 1, 1))
+                  }
+                  disabled={currentPage === 1}
+                  className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+                    currentPage === 1
+                      ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                      : 'bg-blue-600 text-white hover:bg-blue-700'
+                  }`}
+                >
+                  Previous
+                </button>
+
+                <span className="px-4 py-2 text-gray-600 font-medium">
+                  Page {currentPage} of{' '}
+                  {Math.ceil(filteredProducts.length / productsPerPage)}
+                </span>
+
+                <button
+                  onClick={() =>
+                    setCurrentPage((prev) =>
+                      Math.min(
+                        prev + 1,
+                        Math.ceil(filteredProducts.length / productsPerPage)
+                      )
+                    )
+                  }
+                  disabled={
+                    currentPage ===
+                    Math.ceil(filteredProducts.length / productsPerPage)
+                  }
+                  className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+                    currentPage ===
+                    Math.ceil(filteredProducts.length / productsPerPage)
+                      ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                      : 'bg-blue-600 text-white hover:bg-blue-700'
+                  }`}
+                >
+                  Next
+                </button>
+              </div>
             )}
           </section>
         )}

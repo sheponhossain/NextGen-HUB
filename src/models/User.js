@@ -4,7 +4,9 @@ const userSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true, lowercase: true },
-    password: { type: String, required: true },
+    password: { type: String },
+    image: { type: String },
+    isGoogleUser: { type: Boolean, default: false },
   },
   { timestamps: true }
 );

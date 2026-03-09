@@ -204,7 +204,7 @@ export default function ProductDetails() {
       <div className="max-w-5xl mx-auto p-6 mt-10">
         <motion.button
           onClick={() => router.back()}
-          className="mb-6 flex items-center gap-2 text-blue-600 hover:underline"
+          className="mb-6 flex items-center gap-2 text-blue-600 hover:underline cursor-pointer"
         >
           ← Back to Products
         </motion.button>
@@ -216,13 +216,13 @@ export default function ProductDetails() {
           <div className="space-x-4">
             <button
               onClick={() => router.push('/')}
-              className="text-blue-600 hover:underline"
+              className="text-blue-600 hover:underline cursor-pointer"
             >
               Back to Home
             </button>
             <button
               onClick={() => window.location.reload()}
-              className="text-blue-600 hover:underline"
+              className="text-blue-600 hover:underline cursor-pointer"
             >
               Try Again
             </button>
@@ -250,7 +250,7 @@ export default function ProductDetails() {
           </p>
           <button
             onClick={() => router.push('/')}
-            className="mt-4 text-blue-600 hover:underline"
+            className="mt-4 text-blue-600 hover:underline cursor-pointer"
           >
             Back to Home
           </button>
@@ -263,7 +263,7 @@ export default function ProductDetails() {
     <div className="max-w-5xl mx-auto p-6 mt-10">
       <motion.button
         onClick={() => router.back()}
-        className="mb-6 flex items-center gap-2 text-blue-600 hover:underline"
+        className="mb-6 flex items-center gap-2 text-blue-600 hover:underline cursor-pointer"
       >
         ← Back to Products
       </motion.button>

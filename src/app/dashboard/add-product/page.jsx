@@ -500,7 +500,7 @@ export default function AddProduct() {
                   <button
                     type="button"
                     onClick={() => setImagePreview('')}
-                    className="text-red-600 hover:text-red-800 text-sm font-medium transition-colors flex items-center gap-1"
+                    className="cursor-pointer text-red-600 hover:text-red-800 text-sm font-medium transition-colors flex items-center gap-1"
                   >
                     <svg
                       className="w-4 h-4"

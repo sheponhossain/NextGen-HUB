@@ -14,18 +14,45 @@ export default function LoginPage() {
     e.preventDefault();
     setLoading(true);
 
-    const res = await signIn('credentials', {
-      email: e.target.email.value,
-      password: e.target.password.value,
-      redirect: false,
-    });
+    try {
+      const res = await signIn('credentials', {
+        email: e.target.email.value,
+        password: e.target.password.value,
+        redirect: false,
+      });
 
-    if (res.ok) {
-      router.push('/');
-      router.refresh();
-    } else {
-      alert('Invalid Credentials! Try demo@example.com / demopassword123');
+      if (res.ok) {
+        router.push('/');
+        router.refresh();
+      } else {
+        alert('Invalid Credentials! Try demo@example.com / demopassword123');
+        setLoading(false);
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      alert('An error occurred during login. Please try again.');
       setLoading(false);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await signIn('google', {
+        callbackUrl: '/',
+        redirect: true,
+      });
+
+      if (result?.error) {
+        console.error('Google login error:', result.error);
+        alert(
+          'Google login failed. Please check your credentials and try again.'
+        );
+      }
+    } catch (error) {
+      console.error('Google login error:', error);
+      alert(
+        'Google login failed. Please check your internet connection and try again.'
+      );
     }
   };
 
@@ -50,7 +77,7 @@ export default function LoginPage() {
           <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            onClick={() => signIn('google', { callbackUrl: '/' })}
+            onClick={handleGoogleLogin}
             className="w-full flex items-center justify-center gap-3 px-4 py-3 border border-gray-300 rounded-xl shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 transition"
           >
             <Image
@@ -106,7 +133,7 @@ export default function LoginPage() {
         <div className="text-center mt-6">
           <Link
             href="/register"
-            className="text-sm font-medium text-blue-600 hover:text-blue-500 underline decoration-2 underline-offset-4"
+            className="text-sm font-medium text-blue-600 hover:text-blue-500 underline decoration-2 underline-offset-4 cursor-pointer"
           >
             Don&apos;t have an account? Register
           </Link>

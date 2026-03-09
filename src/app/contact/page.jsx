@@ -92,7 +92,7 @@ export default function ContactPage() {
               href={info.link}
               {...fadeIn}
               transition={{ delay: idx * 0.1 }}
-              className="p-6 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2 border border-blue-100 text-center group"
+              className="p-6 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2 border border-blue-100 text-center group cursor-pointer"
             >
               <div className="text-5xl mb-4">{info.icon}</div>
               <h3 className="text-xl font-bold text-gray-800 mb-2">
@@ -270,7 +270,7 @@ export default function ContactPage() {
                     href="#"
                     whileHover={{ scale: 1.2 }}
                     whileTap={{ scale: 0.9 }}
-                    className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 text-white rounded-full flex items-center justify-center font-bold hover:shadow-lg transition-all"
+                    className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 text-white rounded-full flex items-center justify-center font-bold hover:shadow-lg transition-all cursor-pointer"
                   >
                     {social.icon}
                   </motion.a>

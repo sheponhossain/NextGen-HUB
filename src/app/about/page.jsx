@@ -84,14 +84,14 @@ export default function AboutPage() {
             <motion.a
               whileHover={{ scale: 1.05 }}
               href="#contact"
-              className="px-8 py-4 bg-blue-600 text-white rounded-full font-bold hover:bg-blue-700 transition-all shadow-lg"
+              className="px-8 py-4 bg-blue-600 text-white rounded-full font-bold hover:bg-blue-700 transition-all shadow-lg cursor-pointer"
             >
               Get In Touch
             </motion.a>
             <motion.a
               whileHover={{ scale: 1.05 }}
               href="#vision"
-              className="px-8 py-4 border-2 border-blue-600 text-blue-600 rounded-full font-bold hover:bg-blue-50 transition-all"
+              className="px-8 py-4 border-2 border-blue-600 text-blue-600 rounded-full font-bold hover:bg-blue-50 transition-all cursor-pointer"
             >
               Learn More
             </motion.a>
@@ -232,7 +232,7 @@ export default function AboutPage() {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-white text-blue-600 px-12 py-4 rounded-xl font-bold hover:shadow-2xl transition-all text-lg"
+            className="bg-white text-blue-600 px-12 py-4 rounded-xl font-bold hover:shadow-2xl transition-all text-lg cursor-pointer"
           >
             Start Your Free Trial
           </motion.button>
