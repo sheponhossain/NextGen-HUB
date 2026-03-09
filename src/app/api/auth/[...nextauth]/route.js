@@ -58,7 +58,6 @@ const handler = NextAuth({
     signIn: '/login',
     error: '/login', // Redirect to login page on error
     newUser: '/register', // Redirect new Google users to register page
-    signOut: '/', // Redirect to home page after logout
   },
   callbacks: {
     async signIn({ user, account, profile }) {
@@ -111,7 +110,8 @@ const handler = NextAuth({
       return session;
     },
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret:
+    process.env.NEXTAUTH_SECRET || 'fallback-secret-key-for-development-only',
   session: {
     strategy: 'jwt',
     maxAge: 30 * 24 * 60 * 60, // 30 days
