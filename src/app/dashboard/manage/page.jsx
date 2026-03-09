@@ -53,12 +53,10 @@ export default function ManageProducts() {
     const res = await fetch('/api/products');
     const data = await res.json();
     if (data.success) {
-      // Filter products to show only those created by the current user
+      // Filter products to show only those created by the current user's email
       const userProducts = data.data.filter(
         (product) =>
-          product.createdBy === session?.user?.email ||
-          product.createdBy === session?.user?.name ||
-          !product.createdBy // For backward compatibility with existing products
+          product.createdBy === session?.user?.email || !product.createdBy // For backward compatibility with existing products
       );
       setProducts(userProducts);
     }
