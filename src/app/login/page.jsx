@@ -36,16 +36,9 @@ export default function LoginPage() {
 
   const handleGoogleLogin = async () => {
     try {
-      const result = await signIn('google', {
+      await signIn('google', {
         callbackUrl: '/',
-        redirect: true,
       });
-
-      if (result?.error) {
-        alert(
-          'Google login failed. Please check your credentials and try again.'
-        );
-      }
     } catch (error) {
       alert(
         'Google login failed. Please check your internet connection and try again.'
