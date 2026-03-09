@@ -307,6 +307,7 @@ export default function AddProduct() {
       category: formData.get('category') || '📦 All Products',
       sku: formData.get('sku') || '',
       imageUrl: imageUrl,
+      createdBy: session.user.email, // Associate product with user
       updatedAt: new Date(),
     };
 
