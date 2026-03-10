@@ -125,12 +125,12 @@ nextgen-hub/
 - `POST /api/auth/register` - User registration
 - `GET /api/test-mongodb` - Database connection test
 - `POST /api/upload` - File upload to Cloudinary
-- `GET /api/products` - Get all products
-- `POST /api/products` - Create new product
-- `GET /api/products/[id]` - Get product by ID
-- `PUT /api/products/[id]` - Update product
-- `DELETE /api/products/[id]` - Delete product
-- `GET /api/product/[id]` - Get product details
+- `GET /productss` - Get all products
+- `POST /productss` - Create new product
+- `GET /productss/[id]` - Get product by ID
+- `PUT /productss/[id]` - Update product
+- `DELETE /productss/[id]` - Delete product
+- `GET /products/[id]` - Get product details
 
 ### Legal & Support Routes
 - `/privacy` - Privacy policy

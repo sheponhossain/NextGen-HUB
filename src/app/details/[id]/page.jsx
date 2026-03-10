@@ -18,7 +18,7 @@ export default function ProductDetails() {
         setError(null);
 
         // First try to fetch from API
-        const response = await fetch(`/api/products/${id}`);
+        const response = await fetch(`/productss/${id}`);
 
         if (response.ok) {
           const productData = await response.json();
@@ -54,7 +54,7 @@ export default function ProductDetails() {
 
         // If API fails, try to fetch from the main products API
         try {
-          const productsResponse = await fetch('/api/products');
+          const productsResponse = await fetch('/productss');
           if (productsResponse.ok) {
             const productsData = await productsResponse.json();
 
