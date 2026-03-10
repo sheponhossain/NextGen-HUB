@@ -33,7 +33,7 @@ export default function ProductsPage() {
     if (!productToDelete) return;
 
     try {
-      const res = await fetch(`/api/product/${productToDelete}`, {
+      const res = await fetch(`/api/products/${productToDelete}`, {
         method: 'DELETE',
       });
 
