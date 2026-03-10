@@ -17,7 +17,7 @@ export default function AddProduct() {
 
   const fetchProductForEdit = async (id) => {
     try {
-      const res = await fetch(`/productss/${id}`);
+      const res = await fetch(`/products/${id}`);
 
       if (res.ok) {
         const data = await res.json();
@@ -313,7 +313,7 @@ export default function AddProduct() {
 
     const url = editingProduct
       ? `/products/${editingProduct._id}`
-      : '/productss';
+      : '/products';
     const method = editingProduct ? 'PUT' : 'POST';
 
     const res = await fetch(url, {
