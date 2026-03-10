@@ -230,7 +230,7 @@ export default function Navbar() {
         <div className="hidden md:flex space-x-8 items-center">
           {[
             { path: '/', label: 'Home' },
-            { path: '/productss', label: 'Products' },
+            { path: '/products', label: 'Products' },
             { path: '/about', label: 'About' },
             { path: '/contact', label: 'Contact' },
           ].map((item, idx) => {
@@ -315,7 +315,7 @@ export default function Navbar() {
           <div className="py-4 px-6 space-y-2">
             {[
               { path: '/', label: 'Home' },
-              { path: '/productss', label: 'Products' },
+              { path: '/products', label: 'Products' },
               { path: '/about', label: 'About' },
               { path: '/contact', label: 'Contact' },
             ].map((item, idx) => {
