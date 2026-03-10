@@ -25,7 +25,7 @@ export default function ManageProducts() {
 
   const handleEdit = async (id, updatedData) => {
     try {
-      const res = await fetch(`/products/${id}`, {
+      const res = await fetch(`/productss/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -50,7 +50,7 @@ export default function ManageProducts() {
   };
 
   const fetchProducts = async () => {
-    const res = await fetch('/products');
+    const res = await fetch('/productss');
     const data = await res.json();
     if (data.success) {
       setProducts(data.data);
@@ -87,7 +87,7 @@ export default function ManageProducts() {
     }
 
     try {
-      const res = await fetch(`/products/${id}`, { method: 'DELETE' });
+      const res = await fetch(`/productss/${id}`, { method: 'DELETE' });
 
       if (res.ok) {
         setProducts(products.filter((p) => p._id !== id));
@@ -123,7 +123,7 @@ export default function ManageProducts() {
   const handleExportData = async () => {
     try {
       // Fetch all products data
-      const res = await fetch('/products');
+      const res = await fetch('/productss');
       const data = await res.json();
 
       if (!data.success) {
@@ -368,7 +368,7 @@ export default function ManageProducts() {
 
       for (const product of productsToImport) {
         try {
-          const res = await fetch('/products', {
+          const res = await fetch('/productss', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(product),

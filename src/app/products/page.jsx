@@ -33,7 +33,7 @@ export default function ProductsPage() {
     if (!productToDelete) return;
 
     try {
-      const res = await fetch(`/products/${productToDelete}`, {
+      const res = await fetch(`/productss/${productToDelete}`, {
         method: 'DELETE',
       });
 
@@ -61,7 +61,7 @@ export default function ProductsPage() {
     const fetchProducts = async () => {
       try {
         setLoading(true);
-        const res = await fetch('/products-public');
+        const res = await fetch('/productss-public');
         if (!res.ok) {
           throw new Error('Failed to fetch products');
         }

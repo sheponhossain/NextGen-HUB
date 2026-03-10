@@ -279,7 +279,7 @@ export default function SampleProductDetails() {
                 <strong>Note:</strong> This is a sample product for
                 demonstration purposes. To explore real products, visit our{' '}
                 <Link
-                  href="/products"
+                  href="/productss"
                   className="text-blue-600 hover:underline cursor-pointer"
                 >
                   Products page
