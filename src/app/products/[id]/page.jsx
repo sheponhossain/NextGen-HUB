@@ -15,7 +15,7 @@ export default function ProductDetails() {
     const fetchProduct = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`/api/products/${id}`);
+        const res = await fetch(`/api/product/${id}`);
         if (!res.ok) {
           throw new Error('Failed to fetch product');
         }
