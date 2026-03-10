@@ -176,7 +176,7 @@ export default function LandingPage() {
           <div className="flex gap-4 justify-center flex-wrap">
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link
-                href="/productss"
+                href="/products"
                 className="bg-white text-slate-900 px-8 py-4 rounded-full font-bold hover:bg-blue-50 transition shadow-2xl inline-block"
               >
                 Explore Products
